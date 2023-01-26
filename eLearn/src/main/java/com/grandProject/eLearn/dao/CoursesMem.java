@@ -20,6 +20,7 @@ public class CoursesMem implements CourseDAO {
 
     @Override
     public void save(Course course) {
+        course.setId(courses.size()+1);
         courses.add(course);
     }
 

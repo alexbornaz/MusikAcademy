@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Set;
 
 @RestController
+@CrossOrigin
 @RequestMapping(path = "/api/courses")
 public class CoursesController {
     private final CoursesService courseService;
@@ -21,6 +22,7 @@ public class CoursesController {
     @GetMapping
     public ResponseEntity<Set<Course>> getAll(){
         Set<Course> courses = courseService.getAllCourses();
+        System.out.println(courses.toString());
         return new ResponseEntity<>(courses, HttpStatus.OK);
     }
     @PostMapping(path = "/initialize")

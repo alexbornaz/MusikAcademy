@@ -16,21 +16,21 @@ public class CoursesService{
     private final CourseDAO courseDAO;
 
     public CoursesService(CourseDAO courseDAO) {
+
         this.courseDAO = courseDAO;
+        Mentor mentor = new Mentor("alex", "bornaz",1);
+        courseDAO.save(new Course("first course","description of first course",new ArrayList<>(),mentor));
+        courseDAO.save(new Course("second course","description of second course",new ArrayList<>(),mentor));
+        courseDAO.save(new Course("third course","description of third course",new ArrayList<>(),mentor));
     }
 
     public Set<Course> getAllCourses() {
         return courseDAO.getAll();
     }
 
-    private long createId(){
-        return courseDAO.getAll().size()+1;
-    }
-
 
     public void createCourse(Course courseToCreate) {
-        Course newCourse = new Course(courseToCreate.getTitle(),courseToCreate.getDescription(),courseToCreate.getCreator());
-        newCourse.setId(createId());
+        Course newCourse = new Course(courseToCreate.getTitle(),courseToCreate.getDescription(),courseToCreate.getLessons(),courseToCreate.getCreator());
         courseDAO.save(newCourse);
     }
 

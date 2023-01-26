@@ -22,10 +22,10 @@ public class Course {
     private Mentor creator;
     private BigDecimal defaultPrice=BigDecimal.ZERO;
 
-    public Course(String title, String description, Mentor creator) {
+    public Course(String title, String description,List<Lesson> lessons ,Mentor creator) {
         this.title = title;
         this.description = description;
-        this.lessons = new ArrayList<>();
+        this.lessons = lessons;
         this.creator = creator;
 
     }
