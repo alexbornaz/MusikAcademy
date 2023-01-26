@@ -3,21 +3,39 @@ package com.grandProject.eLearn.model.course;
 
 import com.grandProject.eLearn.model.lesson.Lesson;
 import com.grandProject.eLearn.model.user.Mentor;
+;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Course {
+
+
+
+public class Course {
+    private long id;
+
     private String title;
+
     private String description;
     private List<Lesson> lessons;
     private Mentor creator;
+    private BigDecimal defaultPrice=BigDecimal.ZERO;
 
-
-    public Course(String title, String description, List<Lesson> lessons, Mentor creator) {
+    public Course(String title, String description, Mentor creator) {
         this.title = title;
         this.description = description;
-        this.lessons = lessons;
+        this.lessons = new ArrayList<>();
         this.creator = creator;
+
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getTitle() {
@@ -48,7 +66,12 @@ public abstract class Course {
         return creator;
     }
 
-    public void setCreator(Mentor creator) {
-        this.creator = creator;
+
+    public BigDecimal getDefaultPrice() {
+        return defaultPrice;
+    }
+
+    public void setDefaultPrice(BigDecimal defaultPrice) {
+        this.defaultPrice = defaultPrice;
     }
 }
