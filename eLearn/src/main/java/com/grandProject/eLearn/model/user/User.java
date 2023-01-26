@@ -1,6 +1,6 @@
 package com.grandProject.eLearn.model.user;
 
-public abstract class User {
+public class User {
     protected String firstName;
     protected String lastName;
     protected int id;
