@@ -1,0 +1,38 @@
+.submitBtn {
+  color: white;
+  background-color: rgb(83, 49, 5);
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  margin: 0 10px;
+  width: 200px;
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+  transition: 0.4s;
+}
+.submitBtn:hover {
+  box-shadow: 0 0 20px rgba(32, 21, 1, 0.6);
+  border: solid 1px rgb(75, 44, 3);
+
+}
+
+.linkStyle a{
+    color: burlywood;
+}
+.linkStyle a:hover{
+    text-shadow: 0 0 20px rgb(148, 148, 148);
+    transition: 0.4s;
+    font-weight: bolder;
+}
+.errors{
+  color: red;
+  text-align: left;
+}
+.selectOption{
+
+  border: solid 1px burlywood;
+  width: fit-content;
+}
+.selectOption:focus{
+  box-shadow: 0 0 20px rgba(32, 21, 1, 0.6);
+  border: solid 1px rgb(75, 44, 3);
+}
