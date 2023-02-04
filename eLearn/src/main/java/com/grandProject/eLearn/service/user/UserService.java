@@ -1,11 +1,10 @@
-package com.grandProject.eLearn.service;
+package com.grandProject.eLearn.service.user;
 
 import com.grandProject.eLearn.model.user.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
-@Component
 public interface UserService {
 
     List<User> getUsers();
