@@ -16,8 +16,25 @@ public class User {
     private String emailAddress;
     private String firstName;
     private String lastName;
-    @ManyToMany
+
+
+    private String role;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Course> enrolledCourses = new ArrayList<>();
+
+    public User(String username, String password, String emailAddress, String firstName, String lastName, String role) {
+        this.username = username;
+        this.password = password;
+        this.emailAddress = emailAddress;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+    }
+
+    public User() {
+
+    }
+
 
     public long getId() {
         return id;
@@ -73,5 +90,12 @@ public class User {
 
     public void setEnrolledCourses(List<Course> enrolledCourses) {
         this.enrolledCourses = enrolledCourses;
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
