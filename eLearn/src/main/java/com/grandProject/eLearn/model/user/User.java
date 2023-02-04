@@ -16,8 +16,6 @@ public class User {
     private String emailAddress;
     private String firstName;
     private String lastName;
-
-
     private String role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Course> enrolledCourses = new ArrayList<>();
