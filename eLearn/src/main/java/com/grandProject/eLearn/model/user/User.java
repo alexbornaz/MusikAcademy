@@ -5,9 +5,13 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table(name="users")
+@Table(name="users",uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "emailAddress")
+})
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -17,7 +21,7 @@ public class User {
     private String firstName;
     private String lastName;
     private String role;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
     private List<Course> enrolledCourses = new ArrayList<>();
 
     public User(String username, String password, String emailAddress, String firstName, String lastName, String role) {
@@ -89,6 +93,7 @@ public class User {
     public void setEnrolledCourses(List<Course> enrolledCourses) {
         this.enrolledCourses = enrolledCourses;
     }
+
     public String getRole() {
         return role;
     }
