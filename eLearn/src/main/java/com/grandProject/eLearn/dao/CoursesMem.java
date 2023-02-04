@@ -33,7 +33,6 @@ public class CoursesMem implements CourseDAO {
         if(originalCourse != null){
             originalCourse.setTitle(course.getTitle());
             originalCourse.setDescription(course.getDescription());
-            originalCourse.setLessons(course.getLessons());
             originalCourse.setDefaultPrice(course.getDefaultPrice());
             return true;
         }
