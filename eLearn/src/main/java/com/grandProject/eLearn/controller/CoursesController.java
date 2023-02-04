@@ -22,14 +22,15 @@ public class CoursesController {
     @GetMapping
     public ResponseEntity<Set<Course>> getAll(){
         Set<Course> courses = courseService.getAllCourses();
-        System.out.println(courses.toString());
         return new ResponseEntity<>(courses, HttpStatus.OK);
     }
+
     @PostMapping(path = "/initialize")
     public ResponseEntity<String> initializeCourse(@RequestBody Course courseToCreate){
         courseService.createCourse(courseToCreate);
-        return new ResponseEntity("Course created successfully", HttpStatus.OK);
+        return new ResponseEntity<>("Course created successfully", HttpStatus.OK);
     }
+
     @PutMapping(path = "/edit/{courseId}")
     public ResponseEntity<String> editCourse(@PathVariable long courseId,@RequestBody Course updatedCourse){
         if(courseService.updateCourse(courseId,updatedCourse)){
@@ -37,6 +38,7 @@ public class CoursesController {
         }
         return new ResponseEntity<>("Couldn't update course", HttpStatus.BAD_REQUEST);
     }
+
     @DeleteMapping(path = "/delete/{courseId}")
     public ResponseEntity<String> deleteCourse(@PathVariable long courseId){
         if (courseService.deleteCourse(courseId)){
