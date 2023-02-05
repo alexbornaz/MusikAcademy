@@ -7,7 +7,6 @@ const Layout = ({ children }) => {
   const [isDark, setDark] = useState(true);
   const toggleDark = () => {
     setDark(!isDark);
-    console.log(isDark);
     isDark
       ? (document.body.dataset.bsTheme = "dark")
       : (document.body.dataset.bsTheme = "light");
@@ -44,13 +43,14 @@ const Layout = ({ children }) => {
               </Link>
             </li>
           </ul>
-        </div>
-        <Link to="/register" className="btn  btn-block">
+       </div>
+       {localStorage.getItem("token") != null ? (<button className="btn" type="button">Logout</button>) :
+        (<div className="d-flex"><Link to="/register" className="btn  btn-block">
           SignUp
         </Link>
         <Link to="/login" className="btn  mx-2 btn-block">
           Login
-        </Link>
+        </Link></div>)}
         <div>
           <button type="button" onClick={toggleDark}>
             {isDark ? (

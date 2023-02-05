@@ -2,6 +2,8 @@ import AlterAuthBtns from "../../authenticationComponents/AlterAuthBtns";
 import classes from "../../authenticationComponents/AuthForm.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import postAuth from "../../../services/AuthService"
+
 
 const RegistrationForm = () => {
   const formik = useFormik({
@@ -12,7 +14,7 @@ const RegistrationForm = () => {
       emailAddress: "",
       password: "",
       passwordRepeat: "",
-      accType: "",
+      role: "",
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -47,10 +49,23 @@ const RegistrationForm = () => {
         [Yup.ref("password"), null],
         "Passwords must match"
       ),
-      accType: Yup.string().required("Required"),
+      role: Yup.string().required("Required"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+      const finalPayload = JSON.stringify(values, (key, value) => {
+        if (key === "passwordRepeat") {
+          return undefined;
+        }
+        return value;
+      });
+      const response = await postAuth(finalPayload,"/register")
+      if (response.headers.get("Authorization")) {
+        localStorage.setItem("token", response.headers.get("Authorization"));
+        window.location.href = "/";
+      } else {
+        console.log(response.json());
+      }
+      formik.resetForm({ values: "" });
     },
   });
   return (
@@ -160,10 +175,10 @@ const RegistrationForm = () => {
         <div className="form-outline mb-4 d-flex justify-content-center ">
           <label className="form-label mt-2">Type of Account:</label>
           <select
-            id="accType"
-            name="accType"
+            id="role"
+            name="role"
             className={`form-select ${classes.selectOption}`}
-            value={formik.values.accType}
+            value={formik.values.role}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           >

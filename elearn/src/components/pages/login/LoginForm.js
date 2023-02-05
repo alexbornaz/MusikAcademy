@@ -1,23 +1,32 @@
 import { Link } from "react-router-dom";
-import classes from "../../authenticationComponents/AuthForm.module.css"
+import classes from "../../authenticationComponents/AuthForm.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import AlterAuthBtns from "../../authenticationComponents/AlterAuthBtns";
+import postAuth from "../../../services/AuthService";
+
 const LoginForm = () => {
   const formik = useFormik({
     initialValues: {
-      emailAddress: "",
+      username: "",
       password: "",
     },
     validationSchema: Yup.object({
-      emailAddress: Yup.string().email("Invalid email").required("Required"),
+      username: Yup.string().required("Required"),
       password: Yup.string()
         .required("Required")
         .min(4, "Password is too short - minimum 4 characters")
         .max(32, "Password is too long maximum 32 characters"),
     }),
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values) => {
+        const response = await postAuth(JSON.stringify(values),"/login")
+        if (response.headers.get("Authorization")) {
+          localStorage.setItem("token", response.headers.get("Authorization"));
+          window.location.href = "/";
+        } else {
+          console.log(response.json());
+        }
+        formik.resetForm({ values: "" });
     },
   });
 
@@ -26,19 +35,18 @@ const LoginForm = () => {
       <h2 className="fw-bold mb-5 text-light">Welcome Back!</h2>
       <form onSubmit={formik.handleSubmit}>
         <div className="form-outline mb-4">
-          <label className="form-label">Email address</label>
+          <label className="form-label">Username</label>
           <input
-            id="emailAddress"
-            name="emailAddress"
-            type="email"
+            id="username"
+            name="username"
+            type="text"
             className="form-control inputStyle"
-            placeholder="john.doe@example.com"
-            value={formik.values.emailAddress}
+            value={formik.values.username}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
           />
-          {formik.touched.emailAddress && formik.errors.emailAddress ? (
-            <p className="errors">{formik.errors.emailAddress}</p>
+          {formik.touched.username && formik.errors.username ? (
+            <p className="errors">{formik.errors.username}</p>
           ) : null}
         </div>
         <div className="form-outline mb-4">
@@ -63,9 +71,9 @@ const LoginForm = () => {
           Log in
         </button>
         <AlterAuthBtns />
-          <div className={classes.linkStyle}>
-            <Link to="/register"> Don't have an account already?</Link>
-          </div>
+        <div className={classes.linkStyle}>
+          <Link to="/register"> Don't have an account already?</Link>
+        </div>
       </form>
     </>
   );
