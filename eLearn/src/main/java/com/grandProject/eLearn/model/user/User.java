@@ -1,5 +1,6 @@
 package com.grandProject.eLearn.model.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.grandProject.eLearn.model.course.Course;
 import jakarta.persistence.*;
 
@@ -16,6 +17,7 @@ public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String username;
+    @JsonIgnore
     private String password;
     private String emailAddress;
     private String firstName;
