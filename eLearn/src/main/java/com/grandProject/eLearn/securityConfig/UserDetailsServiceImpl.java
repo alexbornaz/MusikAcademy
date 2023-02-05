@@ -20,11 +20,11 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         User user = userService.getUserByUsername(username)
-                .orElseThrow((()->new UsernameNotFoundException(String.format("Username %s not found",username))));
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("Username %s not found", username)));
         List<SimpleGrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole()));
-        return mapUserToCUSD(user,authorities);
+        return mapUserToCUSD(user, authorities);
     }
     private CustomUserDetails mapUserToCUSD(User user, List<SimpleGrantedAuthority> authorities){
         CustomUserDetails customUserDetails = new CustomUserDetails();
