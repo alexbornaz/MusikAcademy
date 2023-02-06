@@ -43,8 +43,6 @@ public class TokenProvider {
                 .setAudience(TOKEN_AUDIENCE)
                 .setSubject(user.getUsername())
                 .claim("rol", roles)
-                .claim("preferred_username", user.getUsername())
-                .claim("email", user.getEmailAddress())
                 .compact();
     }
 
