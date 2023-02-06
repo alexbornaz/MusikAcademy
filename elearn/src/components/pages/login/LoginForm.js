@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "../../authenticationComponents/AuthForm.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import AlterAuthBtns from "../../authenticationComponents/AlterAuthBtns";
 import postAuth from "../../../services/AuthService";
+import { useState } from "react";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
+  const [error, setError] = useState("");
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -19,14 +22,19 @@ const LoginForm = () => {
         .max(32, "Password is too long maximum 32 characters"),
     }),
     onSubmit: async (values) => {
-        const response = await postAuth(JSON.stringify(values),"/login")
-        if (response.headers.get("Authorization")) {
-          localStorage.setItem("token", response.headers.get("Authorization"));
-          window.location.href = "/";
-        } else {
-          console.log(response.json());
-        }
-        formik.resetForm({ values: "" });
+      const response = await postAuth(JSON.stringify(values), "/login");
+      if (response.headers.get("Authorization")) {
+        localStorage.setItem("token", response.headers.get("Authorization"));
+        // window.location.href = "/";
+        navigate("/");
+      } else {
+        setError(
+          await response.json().then((data) => {
+            return data.message;
+          })
+        );
+      }
+      formik.resetForm({ values: "" });
     },
   });
 
@@ -45,9 +53,9 @@ const LoginForm = () => {
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
           />
-          {formik.touched.username && formik.errors.username ? (
+          {formik.touched.username && formik.errors.username && (
             <p className="errors">{formik.errors.username}</p>
-          ) : null}
+          )}
         </div>
         <div className="form-outline mb-4">
           <label className="form-label">Password</label>
@@ -60,10 +68,11 @@ const LoginForm = () => {
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
           />
-          {formik.touched.password && formik.errors.password ? (
-            <p className="errors">{formik.errors.password}</p>
-          ) : null}
+          {formik.touched.password && formik.errors.lastName && (
+            <p className="errors">{formik.errors.lastName}</p>
+          )}
         </div>
+        {error && <p className="errors text-center">{error}</p>}
         <button
           type="submit"
           className={`btn btn-block mb-4 ${classes.submitBtn}`}

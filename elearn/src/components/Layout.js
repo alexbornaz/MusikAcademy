@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
+import AuthBtns from "./authenticationComponents/AuthBtns";
 import Footer from "./Footer";
 import logo from "./images/MusikAcademyLogo.png";
 
 const Layout = ({ children }) => {
-  const [isDark, setDark] = useState(true);
+  const [isDark, setDark] = useState("dark");
   const toggleDark = () => {
     setDark(!isDark);
     isDark
@@ -44,15 +45,9 @@ const Layout = ({ children }) => {
             </li>
           </ul>
        </div>
-       {localStorage.getItem("token") != null ? (<button className="btn" type="button">Logout</button>) :
-        (<div className="d-flex"><Link to="/register" className="btn  btn-block">
-          SignUp
-        </Link>
-        <Link to="/login" className="btn  mx-2 btn-block">
-          Login
-        </Link></div>)}
+        <AuthBtns />
         <div>
-          <button type="button" onClick={toggleDark}>
+          <button type="button" className="darkLightBtn" onClick={toggleDark}>
             {isDark ? (
               <i className="fas fa-moon"></i>
             ) : (

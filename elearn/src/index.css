@@ -1,17 +1,16 @@
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.btn{
+.btn {
   color: white;
   background-color: rgb(83, 49, 5);
   cursor: pointer;
@@ -26,22 +25,36 @@ code {
   background-color: white;
   box-shadow: 0 0 20px rgba(32, 21, 1, 0.6);
   border: solid 1px rgb(75, 44, 3);
-
 }
-.inputStyle{
+.inputStyle {
   border: solid 1px burlywood;
   text-align: center;
-
 }
-.inputStyle:focus{
+.inputStyle:focus {
   box-shadow: 0 0 20px rgba(32, 21, 1, 0.6);
   border: solid 1px rgb(75, 44, 3);
 }
-.errors{
+.errors {
   color: red;
   text-align: left;
 }
 
-.titleWithBtn{
+.titleWithBtn {
   display: inline-block;
+}
+.darkLightBtn {
+  color: white;
+  background-color: rgb(83, 49, 5);
+  cursor: pointer;
+  border-radius: 4px;
+  margin: 0 10px;
+  width: 50px;
+  box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+  transition: 0.4s;
+}
+.darkLightBtn:hover {
+  color: black;
+  background-color: white;
+  box-shadow: 0 0 20px rgba(32, 21, 1, 0.6);
+  border: solid 1px rgb(75, 44, 3);
 }

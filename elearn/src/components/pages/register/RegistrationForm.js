@@ -2,10 +2,13 @@ import AlterAuthBtns from "../../authenticationComponents/AlterAuthBtns";
 import classes from "../../authenticationComponents/AuthForm.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import postAuth from "../../../services/AuthService"
-
+import postAuth from "../../../services/AuthService";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const RegistrationForm = () => {
+  const navigate = useNavigate();
+  const [error,setError] = useState("")
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -14,7 +17,6 @@ const RegistrationForm = () => {
       emailAddress: "",
       password: "",
       passwordRepeat: "",
-      role: "",
     },
     validationSchema: Yup.object({
       firstName: Yup.string()
@@ -49,7 +51,6 @@ const RegistrationForm = () => {
         [Yup.ref("password"), null],
         "Passwords must match"
       ),
-      role: Yup.string().required("Required"),
     }),
     onSubmit: async (values) => {
       const finalPayload = JSON.stringify(values, (key, value) => {
@@ -58,13 +59,14 @@ const RegistrationForm = () => {
         }
         return value;
       });
-      const response = await postAuth(finalPayload,"/register")
+      const response = await postAuth(finalPayload, "/register");
       if (response.headers.get("Authorization")) {
         localStorage.setItem("token", response.headers.get("Authorization"));
-        window.location.href = "/";
+        // window.location.href = "/";
+        navigate("/");
       } else {
-        console.log(response.json());
-      }
+        setError(await response.json().then((data)=>{return data.message}))
+        }
       formik.resetForm({ values: "" });
     },
   });
@@ -85,9 +87,9 @@ const RegistrationForm = () => {
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
               />
-              {formik.touched.firstName && formik.errors.firstName ? (
+              {formik.touched.firstName && formik.errors.firstName && (
                 <p className="errors">{formik.errors.firstName}</p>
-              ) : null}
+              )}
             </div>
           </div>
           <div className="col-md-6 mb-4">
@@ -102,9 +104,9 @@ const RegistrationForm = () => {
                 onBlur={formik.handleBlur}
                 onChange={formik.handleChange}
               />
-              {formik.touched.lastName && formik.errors.lastName ? (
+              {formik.touched.lastName && formik.errors.lastName && (
                 <p className="errors">{formik.errors.lastName}</p>
-              ) : null}
+              )}
             </div>
           </div>
         </div>
@@ -120,9 +122,9 @@ const RegistrationForm = () => {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
-            {formik.touched.username && formik.errors.username ? (
-              <p className="errors">{formik.errors.username}</p>
-            ) : null}
+              {formik.touched.username && formik.errors.username && (
+                <p className="errors">{formik.errors.username}</p>
+              )}
           </div>
           <div className="col-md-6 mb-4">
             <label className="form-label">Email address</label>
@@ -135,9 +137,9 @@ const RegistrationForm = () => {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
-            {formik.touched.emailAddress && formik.errors.emailAddress ? (
-              <p className="errors">{formik.errors.emailAddress}</p>
-            ) : null}
+              {formik.touched.emailAddress && formik.errors.emailAddress && (
+                <p className="errors">{formik.errors.emailAddress}</p>
+              )}
           </div>
         </div>
         <div className="row">
@@ -152,9 +154,9 @@ const RegistrationForm = () => {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
-            {formik.touched.password && formik.errors.password ? (
-              <p className="errors">{formik.errors.password}</p>
-            ) : null}
+              {formik.touched.password && formik.errors.lastName && (
+                <p className="errors">{formik.errors.lastName}</p>
+              )}
           </div>
           <div className="col-md-6 mb-4">
             <label className="form-label">Repeat Password</label>
@@ -167,32 +169,15 @@ const RegistrationForm = () => {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
-            {formik.touched.passwordRepeat && formik.errors.passwordRepeat ? (
-              <p className="errors">{formik.errors.passwordRepeat}</p>
-            ) : null}
+              {formik.touched.passwordRepeat && formik.errors.passwordRepeat && (
+                <p className="errors">{formik.errors.passwordRepeat}</p>
+              )}
           </div>
         </div>
-        <div className="form-outline mb-4 d-flex justify-content-center ">
-          <label className="form-label mt-2">Type of Account:</label>
-          <select
-            id="role"
-            name="role"
-            className={`form-select ${classes.selectOption}`}
-            value={formik.values.role}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          >
-            <option value="">Select type </option>
-            <option value="mentor">Mentor</option>
-            <option value="student">Student</option>
-          </select>
-          {formik.touched.accType && formik.errors.accType ? (
-            <p className="errors">{formik.errors.accType}</p>
-          ) : null}
-        </div>
+        {error && <p className="errors">{error}</p>}
         <button
           type="submit"
-          className={`btn btn-block mb-4 ${classes.submitBtn}`}
+          className={`btn btn-block mb-4 mt-4 ${classes.submitBtn}`}
         >
           Sign up
         </button>
