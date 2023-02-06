@@ -13,6 +13,7 @@ public interface UserService {
 
     boolean hasUserWithUsername(String username);
 
+
     boolean hasUserWithEmail(String email);
 
     User validateAndGetUserByUsername(String username);
