@@ -1,4 +1,4 @@
-package com.grandProject.eLearn.payload.request;
+package com.grandProject.eLearn.dto.request;
 
 public class SignUpRequest {
 

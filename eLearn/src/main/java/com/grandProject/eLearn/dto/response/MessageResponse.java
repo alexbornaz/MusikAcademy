@@ -1,4 +1,4 @@
-package com.grandProject.eLearn.payload.response;
+package com.grandProject.eLearn.dto.response;
 
 public class MessageResponse {
     private String message;

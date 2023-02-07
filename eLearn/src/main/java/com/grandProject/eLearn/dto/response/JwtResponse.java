@@ -1,6 +1,4 @@
-package com.grandProject.eLearn.payload.response;
-
-import java.util.List;
+package com.grandProject.eLearn.dto.response;
 
 public class JwtResponse {
     private String token;
