@@ -56,7 +56,6 @@ const Layout = ({ children }) => {
           </button>
         </div>
       </nav>
-      <main>{children}</main>
       <Outlet />
       <Footer />
     </>

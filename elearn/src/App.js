@@ -8,8 +8,23 @@ import Report from "./components/pages/Report";
 import Login from "./components/pages/login/Login";
 import Registration from "./components/pages/register/Registration";
 import Course from "./components/pages/Course";
+import UserPage from "./components/pages/UserPage";
+import MyCourses from "./components/pages/MyCourses";
+import CreateCourse from "./components/pages/CreateCourse";
+import BecomeMenotr from "./components/pages/BecomeMentor";
+import state from "./state";
+import { useEffect } from "react";
+import jwtDecode from "jwt-decode";
+import { useAtom } from "jotai";
 
 function App() {
+  const [,setUserData] = useAtom(state.userData);
+  useEffect(() => {
+      const token = localStorage.getItem("token")
+      if (token != null ){
+        setUserData(jwtDecode(token))
+      };
+    },[setUserData]);
   return (
     <BrowserRouter>
       <Routes>
@@ -19,8 +34,14 @@ function App() {
             <Route index element={<Courses />} />
             <Route path="course/:id" element={<Course />} />
           </Route>
-          <Route exact path="about" element={<About />} />
-          <Route exact path="report" element={<Report />} />
+          <Route path="about" element={<About />} />
+          <Route path="report" element={<Report />} />
+          <Route path="user/:username">
+            <Route index element={<UserPage />} />
+            <Route exact path="enrolledCourses" element={<MyCourses />} />
+            <Route exact path="create-course" element={<CreateCourse />} />
+            <Route exact path="become-mentor" elemen={<BecomeMenotr />} />
+          </Route>
         </Route>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Registration />} />

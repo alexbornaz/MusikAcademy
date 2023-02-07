@@ -1,3 +1,5 @@
+
+
 const BASE_URL = "http://localhost:8080/api/auth";
 
 export const postAuth = async (payload,route) => {
@@ -11,6 +13,4 @@ export const postAuth = async (payload,route) => {
   return await response;
 };
 
-
-
-export default postAuth 
+export default postAuth

@@ -21,20 +21,22 @@ public class Course {
 
     private String description;
 
-    private List<String> requirements = new ArrayList<>();
+    private String requirements;
 
-    private List<String> outline = new ArrayList<>();
+    private String outline;
+    private String image;
     @ManyToOne(optional = false)
     private User creator;
     private BigDecimal defaultPrice=BigDecimal.ZERO;
 
-    public Course(String title, String description, List<String> requirements, List<String> outline, User creator, BigDecimal defaultPrice) {
+    public Course(String title, String description, String requirements, String outline, User creator, BigDecimal defaultPrice,String image) {
         this.title = title;
         this.description = description;
         this.requirements = requirements;
         this.outline = outline;
         this.creator = creator;
         this.defaultPrice = defaultPrice;
+        this.image = image;
     }
 
     public Course() {
@@ -42,19 +44,19 @@ public class Course {
     }
 
 
-    public List<String> getRequirements() {
+    public String getRequirements() {
         return requirements;
     }
 
-    public void setRequirements(List<String> requirements) {
+    public void setRequirements(String requirements) {
         this.requirements = requirements;
     }
 
-    public List<String> getOutline() {
+    public String getOutline() {
         return outline;
     }
 
-    public void setOutline(List<String> outline) {
+    public void setOutline(String outline) {
         this.outline = outline;
     }
 
@@ -94,5 +96,13 @@ public class Course {
 
     public void setDefaultPrice(BigDecimal defaultPrice) {
         this.defaultPrice = defaultPrice;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

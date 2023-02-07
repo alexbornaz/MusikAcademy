@@ -5,8 +5,12 @@ import * as Yup from "yup";
 import AlterAuthBtns from "../../authenticationComponents/AlterAuthBtns";
 import postAuth from "../../../services/AuthService";
 import { useState } from "react";
-
+import { useAtom } from "jotai";
+import state from "../../../state";
+import jwtDecode from "jwt-decode";
 const LoginForm = () => {
+  const [,setUserData] = useAtom(state.userData)
+  const [,setToken] = useAtom(state.token)
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const formik = useFormik({
@@ -25,6 +29,8 @@ const LoginForm = () => {
       const response = await postAuth(JSON.stringify(values), "/login");
       if (response.headers.get("Authorization")) {
         localStorage.setItem("token", response.headers.get("Authorization"));
+        setToken(response.headers.get("Authorization"))
+        setUserData(jwtDecode(response.headers.get("Authorization")))
         // window.location.href = "/";
         navigate("/");
       } else {

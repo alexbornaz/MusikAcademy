@@ -5,10 +5,15 @@ import * as Yup from "yup";
 import postAuth from "../../../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import state from "../../../state";
+import { useAtom } from "jotai";
+import jwtDecode from "jwt-decode";
 
 const RegistrationForm = () => {
+  const [,setUserData] = useAtom(state.userData)
+  const [,setToken] = useAtom(state.token)
   const navigate = useNavigate();
-  const [error,setError] = useState("")
+  const [error, setError] = useState("");
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -63,10 +68,16 @@ const RegistrationForm = () => {
       if (response.headers.get("Authorization")) {
         localStorage.setItem("token", response.headers.get("Authorization"));
         // window.location.href = "/";
+        setToken(response.headers.get("Authorization"))
+        setUserData(jwtDecode(response.headers.get("Authorization")))
         navigate("/");
       } else {
-        setError(await response.json().then((data)=>{return data.message}))
-        }
+        setError(
+          await response.json().then((data) => {
+            return data.message;
+          })
+        );
+      }
       formik.resetForm({ values: "" });
     },
   });
@@ -122,9 +133,9 @@ const RegistrationForm = () => {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
-              {formik.touched.username && formik.errors.username && (
-                <p className="errors">{formik.errors.username}</p>
-              )}
+            {formik.touched.username && formik.errors.username && (
+              <p className="errors">{formik.errors.username}</p>
+            )}
           </div>
           <div className="col-md-6 mb-4">
             <label className="form-label">Email address</label>
@@ -137,9 +148,9 @@ const RegistrationForm = () => {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
-              {formik.touched.emailAddress && formik.errors.emailAddress && (
-                <p className="errors">{formik.errors.emailAddress}</p>
-              )}
+            {formik.touched.emailAddress && formik.errors.emailAddress && (
+              <p className="errors">{formik.errors.emailAddress}</p>
+            )}
           </div>
         </div>
         <div className="row">
@@ -154,9 +165,9 @@ const RegistrationForm = () => {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
-              {formik.touched.password && formik.errors.lastName && (
-                <p className="errors">{formik.errors.lastName}</p>
-              )}
+            {formik.touched.password && formik.errors.lastName && (
+              <p className="errors">{formik.errors.lastName}</p>
+            )}
           </div>
           <div className="col-md-6 mb-4">
             <label className="form-label">Repeat Password</label>
@@ -169,9 +180,9 @@ const RegistrationForm = () => {
               onBlur={formik.handleBlur}
               onChange={formik.handleChange}
             />
-              {formik.touched.passwordRepeat && formik.errors.passwordRepeat && (
-                <p className="errors">{formik.errors.passwordRepeat}</p>
-              )}
+            {formik.touched.passwordRepeat && formik.errors.passwordRepeat && (
+              <p className="errors">{formik.errors.passwordRepeat}</p>
+            )}
           </div>
         </div>
         {error && <p className="errors">{error}</p>}

@@ -29,6 +29,7 @@ code {
 .inputStyle {
   border: solid 1px burlywood;
   text-align: center;
+  color: black;
 }
 .inputStyle:focus {
   box-shadow: 0 0 20px rgba(32, 21, 1, 0.6);
