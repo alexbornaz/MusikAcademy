@@ -1,10 +1,13 @@
 import { useFormik } from "formik";
 import { useAtom } from "jotai";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { PostDataAuthenticated } from "../../services/FetchDataService";
 import state from "../../state";
 
 const CreateCourse = () => {
+  const navigate = useNavigate()
   const [paid, setPaid] = useState(false);
   const [userData] = useAtom(state.userData);
   const handlePay = (e) => {
@@ -21,11 +24,18 @@ const CreateCourse = () => {
       requirements: "",
       outline: "",
       price: 0,
-      creator: userData.rol,
+      creatorUsername: userData.sub,
       image: "",
     },
     validationSchema: Yup.object({}),
-    onSubmit: (values) => {},
+    onSubmit: async (values) => {
+        console.log(values)
+        const jsoned = JSON.stringify(values)
+        const response = await PostDataAuthenticated(jsoned,localStorage.getItem("token"),"course/create")
+        if (response){
+          navigate(`/courses/course/${response.id}`)
+        }
+    },
   });
   return (
     <div className="container">
@@ -94,6 +104,18 @@ const CreateCourse = () => {
               />
             </div>
             <div className="form-outline mb-4">
+              <label className="form-label">Image Poster</label>
+              <input
+                id="image"
+                name="image"
+                type="file"
+                className="form-control inputStyle"
+                value={formik.values.image}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              />
+            </div>
+            <div className="form-outline mb-4">
               <label className="form-label">Price:</label>
               <select className="form-select" onChange={handlePay}>
                 <option defaultValue="0">Free</option>
@@ -115,6 +137,11 @@ const CreateCourse = () => {
                 $
               </div>
             )}
+          </div>
+          <div>
+            <button type="submit" className={`btn btn-block mb-4`}>
+              Create Course
+            </button>
           </div>
         </form>
       </div>
