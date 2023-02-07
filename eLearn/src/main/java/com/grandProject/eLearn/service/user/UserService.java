@@ -18,6 +18,7 @@ public interface UserService {
 
     User validateAndGetUserByUsername(String username);
 
+
     User saveUser(User user);
 
     void deleteUser(User user);

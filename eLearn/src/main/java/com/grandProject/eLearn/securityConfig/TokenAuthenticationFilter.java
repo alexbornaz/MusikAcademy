@@ -44,6 +44,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             e.printStackTrace();
         }
         chain.doFilter(request, response);
+        System.out.println("trece de filtru");
     }
 
     private Optional<String> getJwtFromRequest(HttpServletRequest request) {

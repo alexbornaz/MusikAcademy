@@ -3,6 +3,7 @@ package com.grandProject.eLearn.securityConfig;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -34,7 +35,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-                .anyRequest().permitAll();
+//                .requestMatchers(HttpMethod.POST,"api/course/create").hasAuthority("mentor")
+//                .requestMatchers(HttpMethod.GET,"api/course/all").permitAll()
+//                .requestMatchers("/api/auth/**").permitAll()
+//                        .anyRequest().authenticated();
+        .anyRequest().permitAll();
+
         http.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         http.exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

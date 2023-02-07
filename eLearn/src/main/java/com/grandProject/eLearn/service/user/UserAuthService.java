@@ -1,8 +1,8 @@
 package com.grandProject.eLearn.service.user;
 
 import com.grandProject.eLearn.model.user.User;
-import com.grandProject.eLearn.payload.request.LoginRequest;
-import com.grandProject.eLearn.payload.request.SignUpRequest;
+import com.grandProject.eLearn.dto.request.LoginRequest;
+import com.grandProject.eLearn.dto.request.SignUpRequest;
 import com.grandProject.eLearn.securityConfig.TokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

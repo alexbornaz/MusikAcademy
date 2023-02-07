@@ -1,10 +1,9 @@
 package com.grandProject.eLearn.controller;
 
 
-import com.grandProject.eLearn.model.user.User;
-import com.grandProject.eLearn.payload.request.LoginRequest;
-import com.grandProject.eLearn.payload.request.SignUpRequest;
-import com.grandProject.eLearn.payload.response.MessageResponse;
+import com.grandProject.eLearn.dto.request.LoginRequest;
+import com.grandProject.eLearn.dto.request.SignUpRequest;
+import com.grandProject.eLearn.dto.response.MessageResponse;
 import com.grandProject.eLearn.service.user.UserAuthService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

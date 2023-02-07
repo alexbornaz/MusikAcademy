@@ -1,15 +1,12 @@
 package com.grandProject.eLearn.model.course;
 
 
-import com.grandProject.eLearn.model.lesson.Lesson;
 import com.grandProject.eLearn.model.user.User;
 import jakarta.persistence.*;
 
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Optional;
 
 
 @Entity
@@ -89,6 +86,9 @@ public class Course {
         return creator;
     }
 
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
 
     public BigDecimal getDefaultPrice() {
         return defaultPrice;
