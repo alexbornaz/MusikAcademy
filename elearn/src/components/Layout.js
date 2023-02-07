@@ -1,17 +1,19 @@
+import { useAtom } from "jotai";
 import { useState } from "react";
 import { Outlet, Link } from "react-router-dom";
+import state from "../state";
 import AuthBtns from "./authenticationComponents/AuthBtns";
 import Footer from "./Footer";
 import logo from "./images/MusikAcademyLogo.png";
 
 const Layout = ({ children }) => {
-  const [isDark, setDark] = useState("dark");
-  const toggleDark = () => {
-    setDark(!isDark);
-    isDark
-      ? (document.body.dataset.bsTheme = "dark")
-      : (document.body.dataset.bsTheme = "light");
+  const [theme, setTheme] = useAtom(state.theme);
+  const toggleTheme = () => {
+    setTheme(!theme);
   };
+  theme
+  ? (document.body.dataset.bsTheme = "dark")
+  : (document.body.dataset.bsTheme = "light");
   return (
     <>
       <nav className="navbar navbar-expand-lg">
@@ -47,8 +49,8 @@ const Layout = ({ children }) => {
        </div>
         <AuthBtns />
         <div>
-          <button type="button" className="darkLightBtn" onClick={toggleDark}>
-            {isDark ? (
+          <button type="button" className="darkLightBtn" onClick={toggleTheme}>
+            {theme ? (
               <i className="fas fa-moon"></i>
             ) : (
               <i className="fas fa-lightbulb"></i>
