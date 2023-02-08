@@ -15,7 +15,7 @@ public class Course {
     private long id;
 
     private String title;
-
+    @Lob
     private String description;
 
     private String requirements;

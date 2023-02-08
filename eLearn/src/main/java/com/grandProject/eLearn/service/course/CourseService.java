@@ -11,6 +11,8 @@ public interface CourseService {
 
     Optional<Course> getCourseById(Long id);
 
+    boolean exists(Long id);
+
 
     void saveCourse(Course course);
 

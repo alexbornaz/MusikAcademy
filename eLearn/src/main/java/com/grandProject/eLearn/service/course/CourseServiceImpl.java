@@ -1,5 +1,6 @@
 package com.grandProject.eLearn.service.course;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.grandProject.eLearn.dto.request.CourseDTO;
 import com.grandProject.eLearn.model.course.Course;
 import com.grandProject.eLearn.model.user.User;
@@ -8,6 +9,7 @@ import com.grandProject.eLearn.service.user.UserService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +31,11 @@ public class CourseServiceImpl implements CourseService{
     @Override
     public Optional<Course> getCourseById(Long id) {
         return courseRepository.findById(id);
+    }
+
+    @Override
+    public boolean exists(Long id) {
+        return courseRepository.existsById(id);
     }
 
     @Override
