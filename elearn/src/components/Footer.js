@@ -59,7 +59,7 @@ const Footer = () => {
         </div>
         <div className="text-center p-2">
           © 2023 Copyright:
-          <Link className="text-white" to="/">
+          <Link to="/">
             MusikAcademy.com
           </Link>
         </div>

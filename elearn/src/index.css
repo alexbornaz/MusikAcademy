@@ -32,7 +32,7 @@ code {
   color: black;
 }
 .inputStyle:focus {
-  box-shadow: 0 0 20px rgba(32, 21, 1, 0.6);
+  box-shadow: 0 0 20px rgba(49, 32, 1, 0.6);
   border: solid 1px rgb(75, 44, 3);
 }
 .errors {
@@ -58,4 +58,8 @@ code {
   background-color: white;
   box-shadow: 0 0 20px rgba(32, 21, 1, 0.6);
   border: solid 1px rgb(75, 44, 3);
+}
+
+a{
+  text-decoration: none !important;
 }

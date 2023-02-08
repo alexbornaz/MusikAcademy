@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { useState } from "react";
+import { useEffect} from "react";
 import { Outlet, Link } from "react-router-dom";
 import state from "../state";
 import AuthBtns from "./authenticationComponents/AuthBtns";
@@ -11,6 +11,9 @@ const Layout = ({ children }) => {
   const toggleTheme = () => {
     setTheme(!theme);
   };
+  useEffect(() => {
+    sessionStorage.setItem("theme", theme);
+  }, [theme]);
   theme
   ? (document.body.dataset.bsTheme = "dark")
   : (document.body.dataset.bsTheme = "light");
