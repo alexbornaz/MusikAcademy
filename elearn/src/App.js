@@ -11,11 +11,12 @@ import Course from "./components/pages/Course";
 import UserPage from "./components/pages/UserPage";
 import MyCourses from "./components/pages/MyCourses";
 import CreateCourse from "./components/pages/CreateCourse";
-import BecomeMenotr from "./components/pages/BecomeMentor";
+import BecomeMentor from "./components/pages/BecomeMentor";
 import state from "./state";
 import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import { useAtom } from "jotai";
+import { PrivateRoutes } from "./PrivateRoutes";
 
 function App() {
   const [,setUserData] = useAtom(state.userData);
@@ -32,15 +33,15 @@ function App() {
           <Route index element={<Home />} />
           <Route path="courses">
             <Route index element={<Courses />} />
-            <Route path="course/:id" element={<Course />} />
+            <Route path="course/:courseId" element={<Course />} />
           </Route>
           <Route path="about" element={<About />} />
           <Route path="report" element={<Report />} />
-          <Route path="user/:username">
+          <Route path="user/:username" exact element={<PrivateRoutes />}>
             <Route index element={<UserPage />} />
             <Route exact path="enrolledCourses" element={<MyCourses />} />
             <Route exact path="create-course" element={<CreateCourse />} />
-            <Route exact path="become-mentor" elemen={<BecomeMenotr />} />
+            <Route exact path="become-mentor" element={<BecomeMentor />} />
           </Route>
         </Route>
         <Route path="login" element={<Login />} />

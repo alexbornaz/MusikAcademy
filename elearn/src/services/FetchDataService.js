@@ -4,7 +4,7 @@ export const PostDataAuthenticated = async (payload, token, route) => {
     method: "post",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
+      "Authorization": `Bearer ${token}`,
     },
     body: payload,
   });
