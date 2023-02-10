@@ -1,5 +1,6 @@
 package com.grandProject.eLearn.service.user;
 
+import com.grandProject.eLearn.model.course.Course;
 import com.grandProject.eLearn.model.user.User;
 import com.grandProject.eLearn.repository.UserRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -43,6 +44,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Course> getEnrolledCourses(String username) {
+        return null;
+    }
+
+    @Override
     public User saveUser(User user) {
         return userRepository.save(user);
     }
@@ -51,4 +57,6 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(User user) {
         userRepository.delete(user);
     }
+
+
 }

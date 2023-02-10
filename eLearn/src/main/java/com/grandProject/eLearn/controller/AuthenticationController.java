@@ -4,7 +4,7 @@ package com.grandProject.eLearn.controller;
 import com.grandProject.eLearn.dto.request.LoginRequest;
 import com.grandProject.eLearn.dto.request.SignUpRequest;
 import com.grandProject.eLearn.dto.response.MessageResponse;
-import com.grandProject.eLearn.service.user.UserAuthService;
+import com.grandProject.eLearn.service.auth.UserAuthService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

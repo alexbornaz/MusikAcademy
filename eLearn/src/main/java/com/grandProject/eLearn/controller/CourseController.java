@@ -23,6 +23,7 @@
         @GetMapping("/all")
         public ResponseEntity<List<Course>> getAll(){
             List<Course> courses = courseService.getCourses();
+            System.out.println(courses);
             return ResponseEntity.ok().body(courses);
         }
 
@@ -38,7 +39,6 @@
 
         @PostMapping(value = "/create")
         public ResponseEntity<?> createCourse(@RequestBody CourseDTO courseInfo){
-
                 Long id = courseService.saveCourse(courseInfo);
             System.out.println(id);
                 return ResponseEntity.ok().body(new CreatedCourseMessage("success",id));

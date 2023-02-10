@@ -10,6 +10,7 @@ public interface CourseService {
     List<Course> getCourses();
 
     Optional<Course> getCourseById(Long id);
+    Course getValidCourseById(Long id);
 
     boolean exists(Long id);
 

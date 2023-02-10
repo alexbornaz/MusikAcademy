@@ -6,6 +6,7 @@ import com.grandProject.eLearn.model.course.Course;
 import com.grandProject.eLearn.model.user.User;
 import com.grandProject.eLearn.repository.CourseRepository;
 import com.grandProject.eLearn.service.user.UserService;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -31,6 +32,11 @@ public class CourseServiceImpl implements CourseService{
     @Override
     public Optional<Course> getCourseById(Long id) {
         return courseRepository.findById(id);
+    }
+
+    @Override
+    public Course getValidCourseById(Long id) {
+        return getCourseById(id).orElseThrow(()->new IllegalArgumentException("Course not found"));
     }
 
     @Override

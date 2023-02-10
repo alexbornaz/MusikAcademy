@@ -1,12 +1,15 @@
 package com.grandProject.eLearn.model.course;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.grandProject.eLearn.model.user.User;
 import jakarta.persistence.*;
 
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 
 @Entity
@@ -15,7 +18,6 @@ public class Course {
     private long id;
 
     private String title;
-    @Lob
     private String description;
 
     private String requirements;
@@ -25,6 +27,8 @@ public class Course {
     @ManyToOne(optional = false)
     private User creator;
     private BigDecimal defaultPrice=BigDecimal.ZERO;
+    @ManyToMany(mappedBy = "enrolledCourses")
+    private Set<User> signedUsers=new HashSet<>();
 
     public Course(String title, String description, String requirements, String outline, User creator, BigDecimal defaultPrice,String image) {
         this.title = title;

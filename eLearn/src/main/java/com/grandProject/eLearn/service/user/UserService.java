@@ -1,5 +1,6 @@
 package com.grandProject.eLearn.service.user;
 
+import com.grandProject.eLearn.model.course.Course;
 import com.grandProject.eLearn.model.user.User;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public interface UserService {
 
     User validateAndGetUserByUsername(String username);
 
+    List<Course> getEnrolledCourses(String username);
 
     User saveUser(User user);
 

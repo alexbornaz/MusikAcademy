@@ -23,7 +23,13 @@ public class User {
     private String firstName;
     private String lastName;
     private String role;
-    @OneToMany
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "users_enrolled_courses",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "enrolled_courses_id")
+    )
     private List<Course> enrolledCourses = new ArrayList<>();
 
     public User(String username, String password, String emailAddress, String firstName, String lastName, String role) {
@@ -102,5 +108,9 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void addCourse(Course course){
+        this.enrolledCourses.add(course);
     }
 }

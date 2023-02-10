@@ -1,6 +1,15 @@
 package com.grandProject.eLearn.dto.request;
 
 public class CourseDTO {
+    private String title;
+    private String description;
+    private String requirements;
+    private String outline;
+    private String price;
+    private String image;
+    private String creatorUsername;
+
+
     public CourseDTO(String title, String description, String requirements, String outline, String price, String image, String creatorUsername) {
         this.title = title;
         this.description = description;
@@ -67,11 +76,5 @@ public class CourseDTO {
         this.creatorUsername = creatorUsername;
     }
 
-    private String title;
-    private String description;
-    private String requirements;
-    private String outline;
-    private String price;
-    private String image;
-    private String creatorUsername;
+
 }
