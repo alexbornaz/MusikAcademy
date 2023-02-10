@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import CourseCard from "../CourseCard";
 import CoursesSearch from "../CoursesSearch";
 const Courses = () => {
   const [courses, setCourses] = useState([]);
@@ -27,25 +27,7 @@ const Courses = () => {
         <div className="container">
           <div className="row row-cols-6 gap-4">
             {filteredCourses.map((course) => (
-              <Link
-                key={course.id}
-                to={`course/${course.id}`}
-                className="text-reset px-0 mx-1 my-3"
-              >
-                <div className="card h-100">
-                  <img
-                    src={`/images/${course.image.substring(12)}`}
-                    className="card-img-top h-100"
-                    alt="..."
-                  />
-                  <div className="card-body ">
-                    <h5 className="card-title">{course.title}</h5>
-                    <p className="card-text text-truncate">
-                      {course.description}
-                    </p>
-                  </div>
-                </div>
-              </Link>
+              <CourseCard key={course.id} course={course} />
             ))}
           </div>
         </div>

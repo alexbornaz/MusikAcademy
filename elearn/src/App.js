@@ -17,6 +17,7 @@ import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
 import { useAtom } from "jotai";
 import { PrivateRoutes } from "./PrivateRoutes";
+import { PrivateRoute } from "./components/PrivateRoute";
 
 function App() {
   const [,setUserData] = useAtom(state.userData);
@@ -44,8 +45,10 @@ function App() {
             <Route exact path="become-mentor" element={<BecomeMentor />} />
           </Route>
         </Route>
+        <Route exact element={<PrivateRoute/>}>
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Registration />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

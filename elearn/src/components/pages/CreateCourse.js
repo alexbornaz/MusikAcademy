@@ -37,6 +37,7 @@ const CreateCourse = () => {
         "course/create"
       );
       if (response) {
+        console.log(response)
         navigate(`/courses/course/${response.id}`);
       }
     },
