@@ -15,7 +15,7 @@ const CourseCurriculum = () => {
     const extractId = (url) => {
         const regex = /(?:\?v=|\/embed\/|\/watch\?v=)([a-zA-Z0-9_-]{11})/;
         const match = url.match(regex)
-        return match[1];
+        return match ? match[1] : null;
     }
     const handleChange = (e) => {
         const url = e.target.dataset.url
@@ -28,6 +28,7 @@ const CourseCurriculum = () => {
         (async () => {
             const data = await GetDataAuthenticated(`lessons/${param.courseId}`, token)
             setLessons(data)
+            console.log(data)
         })();
     }, [param.courseId, token])
     return (

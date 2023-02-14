@@ -33,7 +33,7 @@ const Course = () => {
               }}
             >
               <h1 className="display-4 titleWithBtn">{course.title}</h1>
-              {userData && userData.sub === course.creator.username ? <AddLesson /> : <StartCourse username={userData.sub} courseId={course.id}/>}
+              {userData && (userData.sub === course.creator.username ? <AddLesson courseId={course.id} /> : <StartCourse username={userData.sub} courseId={course.id}/>)}
             </div>
           </div>
           <div className="row">

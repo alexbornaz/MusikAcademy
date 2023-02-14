@@ -55,7 +55,7 @@ const RegistrationForm = () => {
       passwordRepeat: Yup.string().oneOf(
         [Yup.ref("password"), null],
         "Passwords must match"
-      ),
+      ).required("Required"),
     }),
     onSubmit: async (values) => {
       const finalPayload = JSON.stringify(values, (key, value) => {
