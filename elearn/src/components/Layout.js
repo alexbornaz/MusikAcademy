@@ -8,15 +8,19 @@ import logo from "./images/MusikAcademyLogo.png";
 
 const Layout = ({ children }) => {
   const [theme, setTheme] = useAtom(state.theme);
+  
   const toggleTheme = () => {
     setTheme(!theme);
   };
+  
   useEffect(() => {
     sessionStorage.setItem("theme", theme);
   }, [theme]);
+  
   theme
   ? (document.body.dataset.bsTheme = "dark")
   : (document.body.dataset.bsTheme = "light");
+  
   return (
     <>
       <nav className="navbar navbar-expand-lg">

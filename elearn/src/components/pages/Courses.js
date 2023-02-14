@@ -6,13 +6,15 @@ const Courses = () => {
   const [searchTerm, setSearchTerm] = useState("");
   useEffect(() => {
     const loader = async () => {
-      const req = await fetch("http://localhost:8080/api/course/all");
+      const req = await fetch("http://localhost:8080/api/course/all",{
+        method:"get",
+      });
       const response = await req.json();
       setCourses(response);
     };
     loader();
   }, []);
-
+  console.log(courses)
   const filteredCourses = courses.filter((course) => {
     return (
       course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

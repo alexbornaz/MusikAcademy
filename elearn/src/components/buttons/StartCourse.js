@@ -1,10 +1,15 @@
+import {PutDataAuthenticated} from "../../services/FetchDataService";
+import {useAtom} from "jotai";
+import state from "../../state";
+import {useNavigate} from "react-router-dom";
+
 const StartCourse = ({username,courseId}) => {
+    const [token] = useAtom(state.token)
+    const navigate = useNavigate();
   const handleSubmit = async () => {
-      const req = await fetch(`http://localhost:8080/api/user/${username}/addCourse/${courseId}`,{
-        method:"put"
-      });
-      const response = await req.json();
-      console.log(response)
+      const req = await PutDataAuthenticated(`user/${username}/addCourse/${courseId}`,token)
+      console.log(req)
+      navigate(`/user/${username}/courseCurriculum/${courseId}`)
   }
   return (
     <>
