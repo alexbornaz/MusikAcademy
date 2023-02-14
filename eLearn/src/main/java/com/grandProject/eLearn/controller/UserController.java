@@ -23,13 +23,13 @@ public class UserController {
 
 
     @GetMapping("{username}/enrolled")
-    public ResponseEntity<?> getEnrolledCourses(@PathVariable String username){
+    public ResponseEntity<?> getEnrolledCourses(@PathVariable String username) {
         User user = userService.validateAndGetUserByUsername(username);
         return ResponseEntity.ok().body(user.getEnrolledCourses());
     }
 
     @PutMapping("{username}/addCourse/{courseId}")
-    public ResponseEntity<?> addCourse(@PathVariable String username,@PathVariable Long courseId){
+    public ResponseEntity<?> addCourse(@PathVariable String username, @PathVariable Long courseId) {
         User user = userService.validateAndGetUserByUsername(username);
         Course course = courseService.getValidCourseById(courseId);
         user.addCourse(course);

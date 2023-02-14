@@ -31,7 +31,7 @@ public class UserAuthService {
         user.setFirstName(signUpRequest.getFirstName());
         user.setLastName(signUpRequest.getLastName());
         user.setEmailAddress(signUpRequest.getEmailAddress());
-        user.setRole("USER");
+        user.addRole("USER");
         return user;
     }
     public String authenticateAndGetToken(String username, String password) {

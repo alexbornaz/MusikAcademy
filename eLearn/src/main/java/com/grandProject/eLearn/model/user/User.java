@@ -5,6 +5,7 @@ import com.grandProject.eLearn.model.course.Course;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,7 +23,7 @@ public class User {
     private String emailAddress;
     private String firstName;
     private String lastName;
-    private String role;
+    private Set<String> roles =new HashSet<>();
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -30,15 +31,15 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "enrolled_courses_id")
     )
-    private List<Course> enrolledCourses = new ArrayList<>();
+    private Set<Course> enrolledCourses = new HashSet<>();
 
-    public User(String username, String password, String emailAddress, String firstName, String lastName, String role) {
+    public User(String username, String password, String emailAddress, String firstName, String lastName, Set<String> roles) {
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.role = role;
+        this.roles = roles;
     }
 
     public User() {
@@ -94,23 +95,27 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<Course> getEnrolledCourses() {
+    public Set<Course> getEnrolledCourses() {
         return enrolledCourses;
     }
 
-    public void setEnrolledCourses(List<Course> enrolledCourses) {
+    public void setEnrolledCourses(Set<Course> enrolledCourses) {
         this.enrolledCourses = enrolledCourses;
     }
 
-    public String getRole() {
-        return role;
+    public Set<String> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(Set<String> role) {
+        this.roles = role;
     }
 
     public void addCourse(Course course){
         this.enrolledCourses.add(course);
+    }
+
+    public void addRole(String role){
+        this.roles.add(role);
     }
 }

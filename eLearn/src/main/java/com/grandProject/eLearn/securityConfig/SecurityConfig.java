@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -35,11 +34,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
-//                .requestMatchers(HttpMethod.POST,"api/course/create").hasAuthority("mentor")
-//                .requestMatchers(HttpMethod.GET,"api/course/all").permitAll()
-//                .requestMatchers("/api/auth/**").permitAll()
-//                        .anyRequest().authenticated();
-        .anyRequest().permitAll();
+                .requestMatchers(HttpMethod.POST, "/api/course/create").hasAuthority("mentor")
+                .requestMatchers("/api/auth/*", "/api/course/*").permitAll()
+                .anyRequest().authenticated();
 
         http.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         http.exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));

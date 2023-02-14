@@ -20,7 +20,7 @@ import java.util.Optional;
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
     private final TokenProvider tokenProvider;
-    public static final String TOKEN_HEADER = "Authorization";
+    public static final String TOKEN_HEADER = "authorization";
     public static final String TOKEN_PREFIX = "Bearer ";
 
     public TokenAuthenticationFilter(UserDetailsService userDetailsService, TokenProvider tokenProvider) {
@@ -44,6 +44,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
             e.printStackTrace();
         }
         chain.doFilter(request, response);
+        System.out.println("2");
     }
 
     private Optional<String> getJwtFromRequest(HttpServletRequest request) {
