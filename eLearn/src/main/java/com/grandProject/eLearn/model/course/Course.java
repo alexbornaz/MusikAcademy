@@ -2,6 +2,7 @@ package com.grandProject.eLearn.model.course;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.grandProject.eLearn.model.lesson.Lesson;
 import com.grandProject.eLearn.model.user.User;
 import jakarta.persistence.*;
 
@@ -29,7 +30,6 @@ public class Course {
     private BigDecimal defaultPrice=BigDecimal.ZERO;
     @ManyToMany(mappedBy = "enrolledCourses")
     private Set<User> signedUsers=new HashSet<>();
-
     public Course(String title, String description, String requirements, String outline, User creator, BigDecimal defaultPrice,String image) {
         this.title = title;
         this.description = description;
