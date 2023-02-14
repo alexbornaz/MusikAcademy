@@ -6,6 +6,7 @@ import com.grandProject.eLearn.repository.UserRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -43,10 +44,7 @@ public class UserServiceImpl implements UserService {
         return getUserByUsername(username).orElseThrow(()->new UsernameNotFoundException(String.format("User with username %s not found", username)));
     }
 
-    @Override
-    public List<Course> getEnrolledCourses(String username) {
-        return null;
-    }
+
 
     @Override
     public User saveUser(User user) {
@@ -56,6 +54,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(User user) {
         userRepository.delete(user);
+    }
+
+    @Override
+    public ArrayList<Long> getEnrolledCoursesIds(User user) {
+        ArrayList<Long> idList = new ArrayList<>();
+        user.getEnrolledCourses().forEach(course ->idList.add(course.getId()));
+        return idList;
     }
 
 

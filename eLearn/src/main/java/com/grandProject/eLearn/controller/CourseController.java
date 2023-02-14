@@ -22,7 +22,6 @@ public class CourseController {
     @GetMapping("/all")
     public ResponseEntity<List<Course>> getAll() {
         List<Course> courses = courseService.getCourses();
-        System.out.println(courses);
         return ResponseEntity.ok().body(courses);
     }
 

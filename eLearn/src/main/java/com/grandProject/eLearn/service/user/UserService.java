@@ -4,6 +4,7 @@ import com.grandProject.eLearn.model.course.Course;
 import com.grandProject.eLearn.model.user.User;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 public interface UserService {
@@ -19,9 +20,10 @@ public interface UserService {
 
     User validateAndGetUserByUsername(String username);
 
-    List<Course> getEnrolledCourses(String username);
 
     User saveUser(User user);
 
     void deleteUser(User user);
+
+    ArrayList<Long> getEnrolledCoursesIds(User user);
 }

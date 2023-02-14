@@ -8,6 +8,7 @@ import com.grandProject.eLearn.service.user.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -27,6 +28,14 @@ public class UserController {
         User user = userService.validateAndGetUserByUsername(username);
         return ResponseEntity.ok().body(user.getEnrolledCourses());
     }
+
+    @GetMapping("{username}/enrolled/ids")
+    public ResponseEntity<?> getEnrolledIds(@PathVariable String username){
+        User user = userService.validateAndGetUserByUsername(username);
+        ArrayList courseIdList = userService.getEnrolledCoursesIds(user);
+        return ResponseEntity.ok().body(courseIdList);
+    }
+
 
     @PutMapping("{username}/addCourse/{courseId}")
     public ResponseEntity<?> addCourse(@PathVariable String username, @PathVariable Long courseId) {
