@@ -28,6 +28,8 @@ const AddLessonModal = ({courseId}) => {
             console.log(values);
             const response = await PostDataAuthenticated(JSON.stringify(values), token, `lessons/add/${courseId}`)
             console.log(response);
+            formik.resetForm({ values: "" });
+            alert(response.message)
         }
     })
 
