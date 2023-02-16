@@ -35,7 +35,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/api/course/create").hasAuthority("mentor")
-                .requestMatchers("/api/auth/*", "/api/course/*").permitAll()
+                .requestMatchers("/api/auth/*", "/api/course/*","/api/newsletter/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

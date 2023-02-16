@@ -4,6 +4,7 @@ package com.grandProject.eLearn.controller;
 import com.grandProject.eLearn.dto.request.LoginRequest;
 import com.grandProject.eLearn.dto.request.SignUpRequest;
 import com.grandProject.eLearn.dto.response.MessageResponse;
+import com.grandProject.eLearn.service.EmailSenderService;
 import com.grandProject.eLearn.service.auth.UserAuthService;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthenticationController {
     private final UserAuthService userAuthService;
+    private final EmailSenderService emailSenderService;
 
-    public AuthenticationController(UserAuthService userAuthService) {
+    public AuthenticationController(UserAuthService userAuthService, EmailSenderService emailSenderService) {
         this.userAuthService = userAuthService;
+        this.emailSenderService = emailSenderService;
     }
 
     @PostMapping("/register")
@@ -29,7 +32,11 @@ public class AuthenticationController {
         }
         userAuthService.saveUser(signUpRequest);
         String token = userAuthService.authenticateAndGetToken(signUpRequest.getUsername(),signUpRequest.getPassword());
-        System.out.println(token);
+        try {
+            emailSenderService.sendRegistrationEmailFromApp(signUpRequest.getEmailAddress(),signUpRequest.getUsername());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, token).build();
     }
 

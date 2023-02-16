@@ -45,4 +45,11 @@ public class UserController {
         userService.saveUser(user);
         return ResponseEntity.ok().body(new MessageResponse("Course added"));
     }
+
+    @DeleteMapping("{username}/delete")
+    public  ResponseEntity<MessageResponse> deleteUser(@PathVariable String username){
+        User user = userService.validateAndGetUserByUsername(username);
+        userService.deleteUser(user);
+        return  ResponseEntity.ok().body(new MessageResponse("User deleted"));
+    }
 }
