@@ -67,7 +67,6 @@ const RegistrationForm = () => {
       const response = await postAuth(finalPayload, "/register");
       if (response.headers.get("Authorization")) {
         localStorage.setItem("token", response.headers.get("Authorization"));
-        // window.location.href = "/";
         setToken(response.headers.get("Authorization"))
         setUserData(jwtDecode(response.headers.get("Authorization")))
         navigate("/");

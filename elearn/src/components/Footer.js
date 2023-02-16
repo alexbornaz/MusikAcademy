@@ -2,23 +2,36 @@ import {Link} from "react-router-dom";
 import classes from "./Footer.module.css";
 import {useFormik} from "formik";
 import * as Yup from 'yup'
+import {PostData} from "../services/FetchDataService";
+import InfoModal from "./InfoModal";
+import {useState} from "react";
 
 const Footer = () => {
+    const [message,setMessage] = useState("")
+    const [showModal,setShowModal] = useState(false)
     const formik = useFormik({
         initialValues: {
-            emailAddress: ""
+            email: ""
         },
         validationSchema: Yup.object({
-            emailAddress: Yup.string().email("Invalid email").required("Required")
+            email: Yup.string().email("Invalid email").required("Required")
         }),
         validateOnChange: false,
         validateOnBlur: false,
-        onSubmit: (values) => {
-            console.log(values)
+        onSubmit: async (values) => {
+            const response = await PostData("newsletter/subscribe", JSON.stringify(values))
+            if (response.message) {
+                console.log(response.message)
+                setMessage(response.message)
+                setShowModal(true)
+            }
             formik.resetForm({values: ""})
         }
     })
     return (
+
+        <>
+            {message && <InfoModal title="Subscription" message={message} showModal={showModal} setShowModal={setShowModal}/>}
         <div className={`container-fluid mt-auto ${classes.style}`}>
             <footer className="text-center">
                 <div className="container p-4 pb-0">
@@ -35,16 +48,16 @@ const Footer = () => {
                                     <div className="form-outline form-white mb-4">
                                         <input
                                             type="email"
-                                            id="emailAddress"
-                                            name="emailAddress"
+                                            id="email"
+                                            name="email"
                                             className="form-control inputStyle"
                                             placeholder="Email address ex.john.doe@example.com"
-                                            value={formik.values.emailAddress}
+                                            value={formik.values.email}
                                             onChange={formik.handleChange}
                                             onBlur={formik.handleBlur}
                                         />
-                                        {formik.touched && formik.errors.emailAddress ? (
-                                            <p className="errors">{formik.errors.emailAddress}</p>
+                                        {formik.touched && formik.errors.email ? (
+                                            <p className="errors">{formik.errors.email}</p>
                                         ) : null}
                                     </div>
                                 </div>
@@ -65,6 +78,8 @@ const Footer = () => {
                 </div>
             </footer>
         </div>
+
+        </>
     );
 };
 export default Footer;
