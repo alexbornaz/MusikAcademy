@@ -3,6 +3,7 @@ package com.grandProject.eLearn.securityConfig;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,12 +17,16 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
+@Slf4j
 public class TokenProvider {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
     @Value("${jwt.expiration.minutes}")
     private Long jwtExpirationMinutes;
+    public static final String TOKEN_TYPE = "JWT";
+    public static final String TOKEN_ISSUER = "MA";
+    public static final String TOKEN_AUDIENCE = "MAUI";
 
     public String generate(Authentication authentication) {
         CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
@@ -56,14 +61,19 @@ public class TokenProvider {
                     .parseClaimsJws(token);
 
             return Optional.of(jws);
-        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException |
-                 IllegalArgumentException exception) {
-            exception.printStackTrace();
+        } catch (ExpiredJwtException exception) {
+            log.error("Token {} has expired", token);
+        } catch (UnsupportedJwtException exception) {
+            log.error("Token {} is not supported", token);
+        } catch (MalformedJwtException exception) {
+            log.error("Token {} is malformed", token);
+        } catch (SignatureException exception) {
+            log.error("Token {} signature does not match", token);
+        } catch (IllegalArgumentException exception) {
+            log.error("Token {} is not valid", token);
         }
         return Optional.empty();
     }
 
-    public static final String TOKEN_TYPE = "JWT";
-    public static final String TOKEN_ISSUER = "MA";
-    public static final String TOKEN_AUDIENCE = "MAUI";
+
 }

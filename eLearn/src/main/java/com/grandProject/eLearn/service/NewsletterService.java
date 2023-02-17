@@ -2,12 +2,14 @@ package com.grandProject.eLearn.service;
 
 import com.grandProject.eLearn.model.Subscriber;
 import com.grandProject.eLearn.repository.NewsletterRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class NewsletterService {
 
     private final NewsletterRepository newsletterRepository;
@@ -25,6 +27,7 @@ public class NewsletterService {
     }
 
     public void addSubscriber(Subscriber subscriber) {
+        log.info("{} added to subscribers",subscriber.getEmail());
         newsletterRepository.save(subscriber);
     }
 
@@ -32,6 +35,7 @@ public class NewsletterService {
         if (newsletterRepository.existsByEmail(email)){
             Subscriber subscriber = newsletterRepository.findByEmail(email);
             newsletterRepository.delete(subscriber);
+            log.info("{} deleted from subscribers", email);
         }
     }
     public void removeSubscription(String email) {
@@ -39,6 +43,7 @@ public class NewsletterService {
             Subscriber sub = newsletterRepository.findByEmail(email);
             sub.unsubscribe();
             newsletterRepository.save(sub);
+            log.info("{} unsubscribed from newsletter", email);
         }
     }
 
@@ -58,8 +63,9 @@ public class NewsletterService {
             for (Subscriber subscriber : subscribers) {
                 try {
                     emailSenderService.sendNewsletterEmail(subscriber.getEmail(), emailContent);
+                    log.info("Sent newsletter email to {}",subscriber.getEmail());
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    log.error("Could not send email to {}",subscriber.getEmail());
                 }
             }
         }

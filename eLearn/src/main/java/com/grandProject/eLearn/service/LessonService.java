@@ -5,11 +5,13 @@ import com.grandProject.eLearn.model.course.Course;
 import com.grandProject.eLearn.model.lesson.Lesson;
 import com.grandProject.eLearn.repository.LessonRepository;
 import com.grandProject.eLearn.service.course.CourseService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Slf4j
 public class LessonService {
     private final LessonRepository lessonRepository;
 
@@ -25,9 +27,11 @@ public class LessonService {
     public void addLessonToCourse(Course course, LessonInfo lessonInfo) {
         Lesson newLesson = new Lesson(lessonInfo.getTitle(),lessonInfo.getUrl(),course);
         lessonRepository.save(newLesson);
+        log.info("Saved new lesson to course with id {}",course.getId());
     }
 
     public void deleteLesson(long lessonId) {
+        log.info("Deleted lesson with id {}",lessonId);
         lessonRepository.deleteById(lessonId);
     }
 }

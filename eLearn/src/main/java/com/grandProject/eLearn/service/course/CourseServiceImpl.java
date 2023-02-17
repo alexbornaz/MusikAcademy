@@ -6,6 +6,7 @@ import com.grandProject.eLearn.model.course.Course;
 import com.grandProject.eLearn.model.user.User;
 import com.grandProject.eLearn.repository.CourseRepository;
 import com.grandProject.eLearn.service.user.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class CourseServiceImpl implements CourseService{
     private  final CourseRepository courseRepository;
     private  final UserService userService;
@@ -51,13 +53,11 @@ public class CourseServiceImpl implements CourseService{
 
     @Override
     public Long saveCourse(CourseDTO courseDTO) {
-       return courseRepository.save(mapCourseDto(courseDTO)).getId();
+        log.info("Created course with title {} and owner {}", courseDTO.getTitle(),courseDTO.getCreatorUsername());
+        return courseRepository.save(mapCourseDto(courseDTO)).getId();
     }
 
-    @Override
-    public void deleteUser(Long id) {
-        courseRepository.deleteById(id);
-    }
+
 
     private Course mapCourseDto(CourseDTO courseDTO){
         Course course = new Course();

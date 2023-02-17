@@ -19,5 +19,4 @@ public interface CourseService {
 
     Long saveCourse(CourseDTO courseDTO);
 
-    void deleteUser(Long id);
 }

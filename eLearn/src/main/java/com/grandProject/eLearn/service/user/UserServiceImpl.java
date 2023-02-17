@@ -3,6 +3,7 @@ package com.grandProject.eLearn.service.user;
 import com.grandProject.eLearn.model.course.Course;
 import com.grandProject.eLearn.model.user.User;
 import com.grandProject.eLearn.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 @Service
+@Slf4j
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
@@ -48,12 +50,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
+        log.info("Created user with username {}",user.getUsername());
         return userRepository.save(user);
     }
 
     @Override
     public void deleteUser(User user) {
+        log.info("Deleted user with username {}",user.getUsername());
         userRepository.delete(user);
+
     }
 
     @Override

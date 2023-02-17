@@ -5,6 +5,7 @@ import com.grandProject.eLearn.dto.request.LoginRequest;
 import com.grandProject.eLearn.dto.request.SignUpRequest;
 import com.grandProject.eLearn.securityConfig.TokenProvider;
 import com.grandProject.eLearn.service.user.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class UserAuthService {
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
@@ -36,6 +38,7 @@ public class UserAuthService {
     }
     public String authenticateAndGetToken(String username, String password) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+        log.info("{} has authenticated",username);
         return tokenProvider.generate(authentication);
     }
     public boolean isValidUsername(String username){
@@ -47,6 +50,7 @@ public class UserAuthService {
     public void saveUser(SignUpRequest signUpRequest){
         User user = mapSignUpRequestToUser(signUpRequest);
         userService.saveUser(user);
+        log.info("Created user with username",signUpRequest.getUsername());
     }
 
     public boolean checkCredentials(LoginRequest loginRequest) {
@@ -54,6 +58,7 @@ public class UserAuthService {
            String encodedPass = userService.getUserByUsername(loginRequest.getUsername()).get().getPassword();
            return passwordEncoder.matches(loginRequest.getPassword(),encodedPass);
         }
+        log.warn("Login attempt from {} resulted unsuccessful",loginRequest.getUsername());
         return false;
     }
 }
