@@ -1,4 +1,4 @@
-import AlterAuthBtns from "../../authenticationComponents/AlterAuthBtns";
+import GoogleAuthBtn from "../../authenticationComponents/GoogleAuthBtn";
 import classes from "../../authenticationComponents/AuthForm.module.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -191,7 +191,7 @@ const RegistrationForm = () => {
         >
           Sign up
         </button>
-        <AlterAuthBtns />
+        <GoogleAuthBtn />
       </form>
     </>
   );
