@@ -2,10 +2,12 @@ package com.grandProject.eLearn.securityConfig;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.Collection;
+import java.util.Map;
 
-public class CustomUserDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails, OAuth2User {
     private long id;
     private String username;
     private String password;
@@ -14,6 +16,11 @@ public class CustomUserDetails implements UserDetails {
     private String lastName;
     private Collection<? extends GrantedAuthority> authorities;
 
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return null;
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -92,5 +99,10 @@ public class CustomUserDetails implements UserDetails {
 
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
         this.authorities = authorities;
+    }
+
+    @Override
+    public String getName() {
+        return null;
     }
 }
