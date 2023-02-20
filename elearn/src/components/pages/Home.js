@@ -1,68 +1,33 @@
 import Carousel from "../Carousel/Carousel";
 import "./Home.css";
+import {useEffect, useState} from "react";
+import {GetData} from "../../services/FetchDataService";
+import CourseCard from "../CourseCard";
 
 function Home() {
-  return (
-    <>
-      <Carousel />
-      <section className="my-5">
-        <div className="container">
-          <h1 className="fw-light">Top Courses</h1>
-          <div className="card-group">
-            <div className="card size">
-              <img src="..." className="card-img-top" alt="..." />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-            </div>
-            <div className="card size">
-              <img src="..." className="card-img-top" alt="..." />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-            </div>
-            <div className="card size">
-              <img src="..." className="card-img-top" alt="..." />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-            </div>
-            <div className="card size">
-              <img src="..." className="card-img-top" alt="..." />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-            </div>
-            <div className="card size">
-              <img src="..." className="card-img-top" alt="..." />
-              <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+    const [courses,setCourses]=useState([])
+    useEffect(() => {
+        (async () => {
+            const data = await GetData("course/topCourses")
+            setCourses(data)
+        })()
+    },[])
+    console.log(courses)
+    return (
+        <>
+            <Carousel/>
+            <section className="my-5">
+                <div className="container">
+                    <h1 className="fw-light">Top Courses</h1>
+                    <div className="row row-cols-6 gap-4">
+                    {courses && courses.map((course) => (
+                        <CourseCard key={course.id} course={course}/>
+                    ))}
+                    </div>
+                </div>
+            </section>
+        </>
+    );
 }
+
 export default Home;

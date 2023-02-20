@@ -45,3 +45,13 @@ export const PostData = async (route,payload) => {
     const data = await response.json();
     return await data;
 }
+export const GetData = async (route) => {
+    const response = await fetch(BASE_URL + route, {
+        method: "get",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    const data = await response.json();
+    return await data;
+};
