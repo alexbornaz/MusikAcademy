@@ -1,8 +1,8 @@
 package com.grandProject.eLearn.controller;
 
 import com.grandProject.eLearn.dto.response.MessageResponse;
-import com.grandProject.eLearn.model.course.Course;
-import com.grandProject.eLearn.model.user.User;
+import com.grandProject.eLearn.model.Course;
+import com.grandProject.eLearn.model.User;
 import com.grandProject.eLearn.service.course.CourseService;
 import com.grandProject.eLearn.service.user.UserService;
 import org.springframework.http.ResponseEntity;

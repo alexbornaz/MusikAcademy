@@ -2,7 +2,8 @@ package com.grandProject.eLearn.controller;
 
 import com.grandProject.eLearn.dto.request.CourseDTO;
 import com.grandProject.eLearn.dto.response.CreatedCourseMessage;
-import com.grandProject.eLearn.model.course.Course;
+import com.grandProject.eLearn.dto.response.MessageResponse;
+import com.grandProject.eLearn.model.Course;
 import com.grandProject.eLearn.service.course.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -52,5 +53,16 @@ public class CourseController {
         Long id = courseService.saveCourse(courseInfo);
         log.info("Request for new course with name {} and owner {}",courseInfo.getTitle(),courseInfo.getCreatorUsername());
         return ResponseEntity.ok().body(new CreatedCourseMessage("success", id));
+    }
+
+    @DeleteMapping("/delete/{courseId}")
+    public ResponseEntity<MessageResponse> deleteCourse(@PathVariable Long courseId){
+        try {
+            courseService.deleteCourse(courseId);
+            return ResponseEntity.ok().body(new MessageResponse("Successful deleted"));
+        }catch (Exception e){
+            log.error("Could not delete course with id {}", courseId);
+            return ResponseEntity.ok().body(new MessageResponse("Something went wrong"));
+        }
     }
 }

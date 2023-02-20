@@ -1,15 +1,11 @@
-package com.grandProject.eLearn.model.course;
+package com.grandProject.eLearn.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.grandProject.eLearn.model.lesson.Lesson;
-import com.grandProject.eLearn.model.user.User;
 import jakarta.persistence.*;
 
 
 import java.math.BigDecimal;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
 
@@ -31,6 +27,9 @@ public class Course {
 
     @ManyToMany(mappedBy = "enrolledCourses")
     private Set<User> signedUsers=new HashSet<>();
+    @OneToMany
+    private Set<Review> reviews = new HashSet<>();
+
     public Course(String title, String description, String requirements, String outline, User creator, BigDecimal defaultPrice,String image) {
         this.title = title;
         this.description = description;
@@ -117,5 +116,19 @@ public class Course {
 
     public void setSignedUsers(Set<User> signedUsers) {
         this.signedUsers = signedUsers;
+    }
+
+    public Set<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(Set<Review> reviews) {
+        this.reviews = reviews;
+    }
+    public void addReview(Review review){
+        this.reviews.add(review);
+    }
+    public void deleteReview(Review review){
+        reviews.remove(review);
     }
 }

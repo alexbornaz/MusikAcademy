@@ -37,6 +37,7 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
+
     @Bean
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
         return new HttpCookieOAuth2AuthorizationRequestRepository();
@@ -46,17 +47,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/api/course/create").hasAuthority("mentor")
-                .requestMatchers("/api/auth/*",  "/oauth2/**","/api/course/*","/api/newsletter/**").permitAll()
+                .requestMatchers("/api/auth/*", "/oauth2/**", "/api/course/*", "/api/newsletter/**").permitAll()
                 .anyRequest().authenticated();
         http.oauth2Login().authorizationEndpoint().baseUri("/oauth2/authorize")
                 .authorizationRequestRepository(cookieAuthorizationRequestRepository()).and()
-                        .redirectionEndpoint()
-                                .baseUri("/oauth2/callback/*")
-                                        .and()
-                                                .userInfoEndpoint()
-                                                        .userService(customOAuth2UserService)
-                                                                .and()
-                                                                        .successHandler(customAuthenticationSuccessHandler);
+                .redirectionEndpoint()
+                .baseUri("/oauth2/callback/*")
+                .and()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService)
+                .and()
+                .successHandler(customAuthenticationSuccessHandler);
         http.addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         http.exceptionHandling(e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

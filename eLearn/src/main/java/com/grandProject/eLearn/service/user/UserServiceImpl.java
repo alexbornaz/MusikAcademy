@@ -1,7 +1,6 @@
 package com.grandProject.eLearn.service.user;
 
-import com.grandProject.eLearn.model.course.Course;
-import com.grandProject.eLearn.model.user.User;
+import com.grandProject.eLearn.model.User;
 import com.grandProject.eLearn.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

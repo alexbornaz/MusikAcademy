@@ -2,7 +2,7 @@ package com.grandProject.eLearn.controller;
 
 import com.grandProject.eLearn.dto.request.ChargeRequest;
 import com.grandProject.eLearn.dto.response.MessageResponse;
-import com.grandProject.eLearn.model.course.Course;
+import com.grandProject.eLearn.model.Course;
 import com.grandProject.eLearn.service.StripeService;
 import com.grandProject.eLearn.service.course.CourseService;
 import com.stripe.exception.StripeException;

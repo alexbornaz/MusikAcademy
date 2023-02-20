@@ -1,6 +1,6 @@
 package com.grandProject.eLearn.repository;
 
-import com.grandProject.eLearn.model.user.User;
+import com.grandProject.eLearn.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

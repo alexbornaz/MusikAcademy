@@ -1,7 +1,7 @@
 package com.grandProject.eLearn.service.course;
 
 import com.grandProject.eLearn.dto.request.CourseDTO;
-import com.grandProject.eLearn.model.course.Course;
+import com.grandProject.eLearn.model.Course;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,4 +20,6 @@ public interface CourseService {
     Long saveCourse(CourseDTO courseDTO);
 
     List<Course> getTopCourses();
+
+    void deleteCourse(Long courseId);
 }

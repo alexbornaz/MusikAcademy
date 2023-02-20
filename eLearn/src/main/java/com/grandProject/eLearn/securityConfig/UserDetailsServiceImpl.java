@@ -1,6 +1,6 @@
 package com.grandProject.eLearn.securityConfig;
 
-import com.grandProject.eLearn.model.user.User;
+import com.grandProject.eLearn.model.User;
 import com.grandProject.eLearn.service.user.UserService;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

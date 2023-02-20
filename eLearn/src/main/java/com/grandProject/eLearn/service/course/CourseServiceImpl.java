@@ -2,8 +2,8 @@ package com.grandProject.eLearn.service.course;
 
 
 import com.grandProject.eLearn.dto.request.CourseDTO;
-import com.grandProject.eLearn.model.course.Course;
-import com.grandProject.eLearn.model.user.User;
+import com.grandProject.eLearn.model.Course;
+import com.grandProject.eLearn.model.User;
 import com.grandProject.eLearn.repository.CourseRepository;
 import com.grandProject.eLearn.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -63,6 +63,20 @@ public class CourseServiceImpl implements CourseService{
     public List<Course> getTopCourses() {
         Pageable pageable = PageRequest.of(0,5);
         return courseRepository.getTop(pageable);
+    }
+
+    @Override
+    public void deleteCourse(Long courseId) {
+        Optional<Course> optionalCourse = courseRepository.findById(courseId);
+        if (optionalCourse.isPresent()) {
+            Course course = optionalCourse.get();
+            for (User user : course.getSignedUsers()) {
+                user.getEnrolledCourses().remove(course);
+            }
+            courseRepository.delete(course);
+        } else {
+            throw new IllegalArgumentException("Course not found with ID " + courseId);
+        }
     }
 
 

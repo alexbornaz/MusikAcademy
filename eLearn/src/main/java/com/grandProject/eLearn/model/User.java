@@ -1,12 +1,10 @@
-package com.grandProject.eLearn.model.user;
+package com.grandProject.eLearn.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.grandProject.eLearn.model.course.Course;
+import com.grandProject.eLearn.model.Course;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,7 +23,7 @@ public class User {
     private String lastName;
     private Set<String> roles =new HashSet<>();
     @JsonIgnore
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "users_enrolled_courses",
             joinColumns = @JoinColumn(name = "user_id"),

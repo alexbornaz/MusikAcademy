@@ -1,8 +1,6 @@
 package com.grandProject.eLearn.service.user;
 
-import com.grandProject.eLearn.model.course.Course;
-import com.grandProject.eLearn.model.user.User;
-import org.springframework.stereotype.Component;
+import com.grandProject.eLearn.model.User;
 
 import java.util.ArrayList;
 import java.util.List;

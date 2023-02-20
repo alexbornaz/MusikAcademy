@@ -1,6 +1,6 @@
 package com.grandProject.eLearn.service.auth;
 
-import com.grandProject.eLearn.model.user.User;
+import com.grandProject.eLearn.model.User;
 import com.grandProject.eLearn.dto.request.LoginRequest;
 import com.grandProject.eLearn.dto.request.SignUpRequest;
 import com.grandProject.eLearn.securityConfig.TokenProvider;

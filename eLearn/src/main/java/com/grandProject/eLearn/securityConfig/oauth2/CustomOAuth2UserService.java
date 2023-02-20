@@ -1,9 +1,8 @@
 package com.grandProject.eLearn.securityConfig.oauth2;
 
-import com.grandProject.eLearn.model.user.User;
+import com.grandProject.eLearn.model.User;
 import com.grandProject.eLearn.repository.UserRepository;
 import com.grandProject.eLearn.securityConfig.CustomUserDetails;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;

@@ -1,7 +1,7 @@
-package com.grandProject.eLearn.model.lesson;
+package com.grandProject.eLearn.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.grandProject.eLearn.model.course.Course;
+import com.grandProject.eLearn.model.Course;
 import jakarta.persistence.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;

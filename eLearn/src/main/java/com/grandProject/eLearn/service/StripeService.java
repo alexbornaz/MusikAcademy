@@ -41,7 +41,7 @@ public class StripeService {
 
         PaymentIntent paymentIntent = PaymentIntent.create(paymentIntentParams);
         paymentIntent.confirm();
-        log.info("Successful payment-> amount: {} usd// payment-id-> {}",amount,paymentIntent.getId());
+        log.info("Successful payment-> payment-id-> {}",paymentIntent.getId());
         return paymentIntent.getId();
     }
 

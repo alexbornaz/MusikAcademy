@@ -1,10 +1,9 @@
 package com.grandProject.eLearn.service;
 
 import com.grandProject.eLearn.dto.request.LessonInfo;
-import com.grandProject.eLearn.model.course.Course;
-import com.grandProject.eLearn.model.lesson.Lesson;
+import com.grandProject.eLearn.model.Course;
+import com.grandProject.eLearn.model.Lesson;
 import com.grandProject.eLearn.repository.LessonRepository;
-import com.grandProject.eLearn.service.course.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
