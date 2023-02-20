@@ -28,7 +28,7 @@ const Profile = () => {
         className={`${classes.drop} dropdown-menu ${isOpen ? "show" : ""}`}
         aria-labelledby="profileDropdown"
       >
-        <li className={`dropdown-item ${classes.menuItem}`}><span className="ms-5">{userData.sub}</span></li>
+        <li className={`dropdown-item ${classes.menuItem}`}><span >{userData.sub}</span></li>
         <li><hr className="dropdown-divider" /></li>
         <li>
           <Link
