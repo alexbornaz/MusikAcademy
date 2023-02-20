@@ -40,6 +40,13 @@ public class CourseController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/topCourses")
+    public ResponseEntity<List<Course>> getTopCourses(){
+        List<Course> courses = courseService.getTopCourses();
+        log.info("Requested top courses for home page");
+        return ResponseEntity.ok().body(courses);
+    }
+
     @PostMapping(value = "/create")
     public ResponseEntity<?> createCourse(@RequestBody CourseDTO courseInfo) {
         Long id = courseService.saveCourse(courseInfo);

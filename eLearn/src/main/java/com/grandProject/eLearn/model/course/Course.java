@@ -28,6 +28,7 @@ public class Course {
     @ManyToOne(optional = false)
     private User creator;
     private BigDecimal defaultPrice=BigDecimal.ZERO;
+
     @ManyToMany(mappedBy = "enrolledCourses")
     private Set<User> signedUsers=new HashSet<>();
     public Course(String title, String description, String requirements, String outline, User creator, BigDecimal defaultPrice,String image) {
@@ -108,5 +109,13 @@ public class Course {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public Set<User> getSignedUsers() {
+        return signedUsers;
+    }
+
+    public void setSignedUsers(Set<User> signedUsers) {
+        this.signedUsers = signedUsers;
     }
 }

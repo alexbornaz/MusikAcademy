@@ -19,4 +19,5 @@ public interface CourseService {
 
     Long saveCourse(CourseDTO courseDTO);
 
+    List<Course> getTopCourses();
 }

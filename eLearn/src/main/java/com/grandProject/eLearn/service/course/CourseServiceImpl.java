@@ -1,17 +1,19 @@
 package com.grandProject.eLearn.service.course;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
+
 import com.grandProject.eLearn.dto.request.CourseDTO;
 import com.grandProject.eLearn.model.course.Course;
 import com.grandProject.eLearn.model.user.User;
 import com.grandProject.eLearn.repository.CourseRepository;
 import com.grandProject.eLearn.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.crossstore.ChangeSetPersister;
+
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Base64;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -57,6 +59,11 @@ public class CourseServiceImpl implements CourseService{
         return courseRepository.save(mapCourseDto(courseDTO)).getId();
     }
 
+    @Override
+    public List<Course> getTopCourses() {
+        Pageable pageable = PageRequest.of(0,5);
+        return courseRepository.getTop(pageable);
+    }
 
 
     private Course mapCourseDto(CourseDTO courseDTO){
