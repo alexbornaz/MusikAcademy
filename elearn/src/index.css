@@ -63,3 +63,8 @@ code {
 a{
   text-decoration: none !important;
 }
+
+.testimonialSlider{
+  box-shadow: 0 0 20px rgba(32, 21, 1, 0.6);
+  border-radius: 25px;
+}

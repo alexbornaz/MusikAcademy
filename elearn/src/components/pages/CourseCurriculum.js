@@ -28,7 +28,6 @@ const CourseCurriculum = () => {
         (async () => {
             const data = await GetDataAuthenticated(`lessons/${param.courseId}`, token)
             setLessons(data)
-            console.log(data)
         })();
     }, [param.courseId, token])
     return (

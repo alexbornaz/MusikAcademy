@@ -12,7 +12,6 @@ function Home() {
             setCourses(data)
         })()
     },[])
-    console.log(courses)
     return (
         <>
             <Carousel/>

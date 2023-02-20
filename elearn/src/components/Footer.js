@@ -31,7 +31,6 @@ const Footer = () => {
     return (
 
         <>
-            {message && <InfoModal title="Subscription" message={message} showModal={showModal} setShowModal={setShowModal}/>}
         <div className={`container-fluid mt-auto ${classes.style}`}>
             <footer className="text-center">
                 <div className="container p-4 pb-0">
@@ -78,7 +77,7 @@ const Footer = () => {
                 </div>
             </footer>
         </div>
-
+            {message &&<InfoModal show={showModal} onHide={()=> setShowModal(false)} title="Subscription" message={message}/>}
         </>
     );
 };
