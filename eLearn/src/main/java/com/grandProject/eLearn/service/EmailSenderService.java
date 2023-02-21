@@ -30,4 +30,13 @@ public class EmailSenderService {
 
         mailSender.send(message);
     }
+
+    public void sendMentorApplication(String fromEmail,String applicationMessage){
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo("musikacademytest@gmail.com");
+        message.setSubject("Mentor application "+ fromEmail);
+        message.setText(applicationMessage);
+        mailSender.send(message);
+
+    }
 }

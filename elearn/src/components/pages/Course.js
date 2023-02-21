@@ -20,8 +20,7 @@ const Course = () => {
             setCourse(response);
         };
         loader();
-    }, [id]);
-    console.log(course)
+    }, [id,reviewed]);
     return (<>
         {course && (<div className="container">
             <div className="row">
@@ -77,7 +76,7 @@ const Course = () => {
                     (<div className="row justify-content-end ">
                     <LeaveReview  username={userData.sub} courseId={course.id} setReviewed={setReviewed}/>
                 </div>)}
-                <TestimonialSlider reviews={course.reviews}/>
+                <TestimonialSlider reviews={course.reviews} />
             </div>
         </div>)}
 

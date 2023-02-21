@@ -44,7 +44,7 @@ const CreateCourse = () => {
   });
   return (
     <>
-      {userData.rol[0] === "mentor" ? (
+      {userData.rol.includes("mentor") ? (
         <div className="container">
           <div className="row">
             <div

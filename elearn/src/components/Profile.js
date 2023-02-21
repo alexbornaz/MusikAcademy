@@ -5,7 +5,7 @@ import state from "../state";
 import classes from "./Profile.module.css";
 const Profile = () => {
   const [userData] = useAtom(state.userData)
-  const role = userData.rol[0]
+  const role = userData.rol
   const [isOpen, setIsOpen] = useState(false);
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -39,7 +39,7 @@ const Profile = () => {
             My Courses
           </Link>
         </li>
-        {role !== "mentor" ? (
+        {!role.includes("mentor") ? (
           <li>
             <Link
               className={`dropdown-item ${classes.menuItem}`}

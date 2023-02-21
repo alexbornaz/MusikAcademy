@@ -3,7 +3,7 @@ import TestimonialSliderItem from "./TestimonialSliderItem";
 const TestimonialSlider = ({reviews}) => {
     const demoImage = "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png"
     return (
-        <div id="carouselExample" className="carousel slide my-4 testimonialSlider" style={{}}>
+        <div id="carouselExample" className="carousel slide my-4 testimonialSlider" >
             <h4 className="text-center mt-2">Reviews</h4>
             <div className="carousel-inner text-center">
                 {reviews && reviews.map((review,index) => (
