@@ -46,6 +46,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
+                .requestMatchers("/api/admin/**").hasAnyAuthority("ADMIN")
                 .requestMatchers(HttpMethod.POST, "/api/course/create").hasAuthority("mentor")
                 .requestMatchers("/api/auth/*", "/oauth2/**", "/api/course/*", "/api/newsletter/**").permitAll()
                 .anyRequest().authenticated();

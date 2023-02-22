@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 @Service
@@ -60,6 +61,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(User user) {
         log.info("Deleted user with username {}",user.getUsername());
+        user.setEnrolledCourses(new HashSet<>());
         userRepository.delete(user);
 
     }
