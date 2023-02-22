@@ -20,6 +20,7 @@ import {PrivateRoutes} from "./PrivateRoutes";
 import {PrivateRoute} from "./components/PrivateRoute";
 import CourseCurriculum from "./components/pages/CourseCurriculum";
 import Oauth2RedirectHandler from "./components/pages/Oauth2RedirectHandler";
+import AdminPage from "./components/pages/AdminPage";
 
 
 function App() {
@@ -54,6 +55,7 @@ function App() {
                     <Route path="register" element={<Registration/>}/>
                 </Route>
                 <Route path="oauth2/redirect" element={<Oauth2RedirectHandler/>}/>
+                <Route path="admin" element={<AdminPage />} />
             </Routes>
         </BrowserRouter>
     );
