@@ -3,11 +3,12 @@
     background: hsla(0, 0%, 100%, 0.8);
     backdrop-filter: blur(30px);
     background-color: transparent;
-  }
-  .bgImage {
+}
+
+.bgImage {
     background-image: url(".././images/image.jpg");
     height: 300px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position:10%;
-  }
+    background-position: 10%;
+}

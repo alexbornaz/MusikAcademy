@@ -1,5 +1,5 @@
-const TestimonialSliderItem = ({review,demoImage,index}) =>{
-    return (<div key={review.id} className={`carousel-item ${index=== 0 ? 'active': null}`}>
+const TestimonialSliderItem = ({review, demoImage, index}) => {
+    return (<div key={review.id} className={`carousel-item ${index === 0 ? 'active' : null}`}>
         <img className="rounded-circle shadow-1-strong mb-4 mt-2"
              src={demoImage} alt="avatar"
              style={{width: "150px"}}/>

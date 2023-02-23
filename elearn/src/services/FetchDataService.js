@@ -35,10 +35,10 @@ export const PutDataAuthenticated = async (route, token) => {
     return await data;
 }
 
-export const PostData = async (route,payload) => {
-    const response = await fetch(BASE_URL+ route,{
-        method:"post",
-        headers:{
+export const PostData = async (route, payload) => {
+    const response = await fetch(BASE_URL + route, {
+        method: "post",
+        headers: {
             "Content-Type": "application/json"
         },
         body: payload,

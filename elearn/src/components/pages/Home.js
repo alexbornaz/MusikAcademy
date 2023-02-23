@@ -5,13 +5,13 @@ import {GetData} from "../../services/FetchDataService";
 import CourseCard from "../CourseCard";
 
 function Home() {
-    const [courses,setCourses]=useState([])
+    const [courses, setCourses] = useState([])
     useEffect(() => {
         (async () => {
             const data = await GetData("course/topCourses")
             setCourses(data)
         })()
-    },[])
+    }, [])
     return (
         <>
             <Carousel/>
@@ -19,9 +19,9 @@ function Home() {
                 <div className="container">
                     <h1 className="fw-light">Top Courses</h1>
                     <div className="row row-cols-6 gap-4">
-                    {courses && courses.map((course) => (
-                        <CourseCard key={course.id} course={course}/>
-                    ))}
+                        {courses && courses.map((course) => (
+                            <CourseCard key={course.id} course={course}/>
+                        ))}
                     </div>
                 </div>
             </section>

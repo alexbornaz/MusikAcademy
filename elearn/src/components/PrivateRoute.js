@@ -1,10 +1,10 @@
-import { Navigate, Outlet} from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
 
 export const PrivateRoute = () => {
-    let  isAuthenticated = localStorage.getItem("token") == null ? false : true;
+    let isAuthenticated = localStorage.getItem("token") == null ? false : true;
     return (
         <>
-            {isAuthenticated ? <Navigate to="/" /> : <Outlet />}
+            {isAuthenticated ? <Navigate to="/"/> : <Outlet/>}
         </>
 
     )

@@ -12,7 +12,7 @@ const Course = () => {
     const id = param.courseId;
     const [userData] = useAtom(state.userData)
     const [course, setCourse] = useState();
-    const [reviewed,setReviewed] = useState(false)
+    const [reviewed, setReviewed] = useState(false)
     useEffect(() => {
         const loader = async () => {
             const req = await fetch(`http://localhost:8080/api/course/${id}`);
@@ -20,7 +20,7 @@ const Course = () => {
             setCourse(response);
         };
         loader();
-    }, [id,reviewed]);
+    }, [id, reviewed]);
     return (<>
         {course && (<div className="container">
             <div className="row">
@@ -72,11 +72,11 @@ const Course = () => {
             </div>
             <div className="row">
                 {((course.signedUsers.filter(user => user.username === userData.sub).length === 1 &&
-                    course.reviews.filter(review => review.owner.username === userData.sub).length === 0) && !reviewed) &&
+                        course.reviews.filter(review => review.owner.username === userData.sub).length === 0) && !reviewed) &&
                     (<div className="row justify-content-end ">
-                    <LeaveReview  username={userData.sub} courseId={course.id} setReviewed={setReviewed}/>
-                </div>)}
-                <TestimonialSlider reviews={course.reviews} />
+                        <LeaveReview username={userData.sub} courseId={course.id} setReviewed={setReviewed}/>
+                    </div>)}
+                <TestimonialSlider reviews={course.reviews}/>
             </div>
         </div>)}
 

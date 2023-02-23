@@ -11,10 +11,9 @@ const AdminPage = () => {
     const [selectedUser, setSelectedUser] = useState(null);
 
 
-
-    const handleMakeMentor =async (username) => {
-        const response = await GetDataAuthenticated(`admin/makeMentor/${username}`,token)
-        if (response.message){
+    const handleMakeMentor = async (username) => {
+        const response = await GetDataAuthenticated(`admin/makeMentor/${username}`, token)
+        if (response.message) {
             window.location.reload();
             console.log(response.message);
         }
@@ -63,16 +62,19 @@ const AdminPage = () => {
                     </div>
                     <div>{selectedUser && (
                         <div style={{border: "solid 2px black"}}>
-                            <h2>Username: <span style={{color:"blue"}} >{selectedUser.username}</span></h2>
-                            <h2>EmailAdress: <span style={{color:"blue"}} >{selectedUser.emailAddress}</span></h2>
-                            <h2>First Name: <span style={{color:"blue"}} >{selectedUser.firstName}</span></h2>
-                            <h2>Last Name: <span style={{color:"blue"}} >{selectedUser.lastName}</span></h2>
+                            <h2>Username: <span style={{color: "blue"}}>{selectedUser.username}</span></h2>
+                            <h2>EmailAdress: <span style={{color: "blue"}}>{selectedUser.emailAddress}</span></h2>
+                            <h2>First Name: <span style={{color: "blue"}}>{selectedUser.firstName}</span></h2>
+                            <h2>Last Name: <span style={{color: "blue"}}>{selectedUser.lastName}</span></h2>
                             <h2>Roles:
                                 <ul>
-                                    {selectedUser.roles.map((role, index) => (<li key={index}><span style={{color:"blue"}} >{role}</span></li>))}
+                                    {selectedUser.roles.map((role, index) => (
+                                        <li key={index}><span style={{color: "blue"}}>{role}</span></li>))}
                                 </ul>
                             </h2>
-                            {!selectedUser.roles.includes("mentor") &&<button type="button" onClick={async()=> await handleMakeMentor(selectedUser.username)}>Make Mentor</button>}
+                            {!selectedUser.roles.includes("mentor") && <button type="button"
+                                                                               onClick={async () => await handleMakeMentor(selectedUser.username)}>Make
+                                Mentor</button>}
                         </div>
                     )}</div>
                 </div>

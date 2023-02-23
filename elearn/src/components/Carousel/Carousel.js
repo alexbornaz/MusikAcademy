@@ -37,7 +37,7 @@ const Carousel = () => {
             </div>
             <button
                 className="carousel-control-prev"
-                style={{filter:"invert(100%)"}}
+                style={{filter: "invert(100%)"}}
                 type="button"
                 data-bs-target="#HomeCarousel"
                 data-bs-slide="prev"
@@ -49,7 +49,7 @@ const Carousel = () => {
                 <span className="visually-hidden">Previous</span>
             </button>
             <button
-                className="carousel-control-next" style={{filter:"invert(100%)"}}
+                className="carousel-control-next" style={{filter: "invert(100%)"}}
                 type="button"
                 data-bs-target="#HomeCarousel"
                 data-bs-slide="next"

@@ -31,34 +31,32 @@ function App() {
             setUserData(jwtDecode(token));
         }
     }, [setUserData]);
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Layout/>}>
-                    <Route index element={<Home/>}/>
-                    <Route path="courses">
-                        <Route index element={<Courses/>}/>
-                        <Route path="course/:courseId" element={<Course/>}/>
-                    </Route>
-                    <Route path="about" element={<About/>}/>
-                    <Route path="report" element={<Report/>}/>
-                    <Route path="user/:username" exact element={<PrivateRoutes/>}>
-                        <Route index element={<UserPage/>}/>
-                        <Route exact path="enrolledCourses" element={<MyCourses/>}/>
-                        <Route exact path="courseCurriculum/:courseId" element={<CourseCurriculum/>}/>
-                        <Route exact path="create-course" element={<CreateCourse/>}/>
-                        <Route exact path="become-mentor" element={<BecomeMentor/>}/>
-                    </Route>
+    return (<BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Layout/>}>
+                <Route index element={<Home/>}/>
+                <Route path="courses">
+                    <Route index element={<Courses/>}/>
+                    <Route path="course/:courseId" element={<Course/>}/>
                 </Route>
-                <Route exact element={<PrivateRoute/>}>
-                    <Route path="login" element={<Login/>}/>
-                    <Route path="register" element={<Registration/>}/>
+                <Route path="about" element={<About/>}/>
+                <Route path="report" element={<Report/>}/>
+                <Route path="user/:username" exact element={<PrivateRoutes/>}>
+                    <Route index element={<UserPage/>}/>
+                    <Route exact path="enrolledCourses" element={<MyCourses/>}/>
+                    <Route exact path="courseCurriculum/:courseId" element={<CourseCurriculum/>}/>
+                    <Route exact path="create-course" element={<CreateCourse/>}/>
+                    <Route exact path="become-mentor" element={<BecomeMentor/>}/>
                 </Route>
-                <Route path="oauth2/redirect" element={<Oauth2RedirectHandler/>}/>
-                <Route path="admin" element={<AdminPage />} />
-            </Routes>
-        </BrowserRouter>
-    );
+            </Route>
+            <Route exact element={<PrivateRoute/>}>
+                <Route path="login" element={<Login/>}/>
+                <Route path="register" element={<Registration/>}/>
+            </Route>
+            <Route path="oauth2/redirect" element={<Oauth2RedirectHandler/>}/>
+            <Route path="admin" element={<AdminPage/>}/>
+        </Routes>
+    </BrowserRouter>);
 }
 
 export default App;

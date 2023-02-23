@@ -1,17 +1,17 @@
 .cItem {
     height: 600px;
-  }
-  
-  .cImg {
-    height: 105%;
-    object-fit:cover;
-    filter: brightness(0.5);
-  }
+}
 
-.captionTitle h3{
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1px;
-  font-size: 15rem;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+.cImg {
+    height: 105%;
+    object-fit: cover;
+    filter: brightness(0.5);
+}
+
+.captionTitle h3 {
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 1px;
+    font-size: 15rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
 }
 
