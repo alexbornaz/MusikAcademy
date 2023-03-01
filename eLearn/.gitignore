@@ -38,3 +38,4 @@ out/
 *.sh
 /mvnw
 application.yml
+/logs
