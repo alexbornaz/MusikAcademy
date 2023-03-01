@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  server:
+    build: ./eLearn
+    expose:
+      - ${SERVER_PORT}
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://PostgresSql:5432/MusikAcademy
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    links:
+      - PostgresSql
+
+  client:
+    build: ./elearn
+    environment:
+      - CLIENT_PORT=${CLIENT_PORT}
+    expose:
+      - ${CLIENT_PORT}
+    ports:
+      - ${CLIENT_PORT}:${CLIENT_PORT}
+    links:
+      - server
+    command: npm start
+
+  PostgresSql:
+    image: postgres:alpine
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: MusikAcademy
+    ports:
+      - "5433:5433"
+    volumes:
+      - postgres-data:/data/db
+
+volumes:
+  postgres-data:
+    driver: local
+
