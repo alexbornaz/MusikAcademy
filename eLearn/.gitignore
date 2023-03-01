@@ -37,3 +37,4 @@ out/
 *.jar
 *.sh
 /mvnw
+application.yml
