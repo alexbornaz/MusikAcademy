@@ -3,6 +3,8 @@ import * as Yup from "yup";
 import {PostDataAuthenticated} from "../services/FetchDataService";
 import {useAtom} from "jotai";
 import state from "../state";
+import {toast, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"
 
 const AddLessonModal = ({courseId}) => {
     const [token] = useAtom(state.token)
@@ -29,7 +31,7 @@ const AddLessonModal = ({courseId}) => {
             const response = await PostDataAuthenticated(JSON.stringify(values), token, `lessons/add/${courseId}`)
             console.log(response);
             formik.resetForm({values: ""});
-            alert(response.message)
+            toast.info(response.message,{position: toast.POSITION.TOP_RIGHT})
         }
     })
 
@@ -77,6 +79,7 @@ const AddLessonModal = ({courseId}) => {
                 </div>
             </div>
         </div>
+        <ToastContainer />
     </>
 }
 export default AddLessonModal

@@ -71,12 +71,12 @@ const Course = () => {
                 </div>
             </div>
             <div className="row">
-                {((course.signedUsers.filter(user => user.username === userData.sub).length === 1 &&
+                {userData &&  ((course.signedUsers.filter(user => user.username === userData.sub).length === 1 &&
                         course.reviews.filter(review => review.owner.username === userData.sub).length === 0) && !reviewed) &&
                     (<div className="row justify-content-end ">
-                        <LeaveReview username={userData.sub} courseId={course.id} setReviewed={setReviewed}/>
+                         <LeaveReview username={userData.sub} courseId={course.id} setReviewed={setReviewed}/>
                     </div>)}
-                <TestimonialSlider reviews={course.reviews}/>
+                {(course.reviews && (course.reviews.length > 0)) && <TestimonialSlider reviews={course.reviews}/>}
             </div>
         </div>)}
 

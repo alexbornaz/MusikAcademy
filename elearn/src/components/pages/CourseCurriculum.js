@@ -4,6 +4,7 @@ import {GetDataAuthenticated} from "../../services/FetchDataService";
 import {useAtom} from "jotai";
 import state from "../../state";
 import classes from "./CourseCurriculum.module.css";
+import {ToastContainer} from "react-toastify";
 
 const CourseCurriculum = () => {
     const param = useParams();
@@ -54,6 +55,7 @@ const CourseCurriculum = () => {
                 </div>
             )
             }
+            <ToastContainer />
         </>
     )
 }

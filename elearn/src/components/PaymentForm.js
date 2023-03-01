@@ -3,6 +3,7 @@ import {CardElement, useElements, useStripe} from "@stripe/react-stripe-js";
 import {useAtom} from "jotai";
 import state from "../state";
 import {PostDataAuthenticated} from "../services/FetchDataService";
+import {toast} from "react-toastify";
 
 const PaymentForm = ({courseId, addCourse}) => {
     const [UserToken] = useAtom(state.token)
@@ -27,7 +28,7 @@ const PaymentForm = ({courseId, addCourse}) => {
             console.log(response)
 
             if (response.message) {
-                alert("Payment succeeded")
+                toast.info("Successful payment")
                 await addCourse();
                 setProcessing(false);
             } else {

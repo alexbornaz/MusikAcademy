@@ -15,7 +15,6 @@ const Courses = () => {
         };
         loader();
     }, []);
-    console.log(courses)
     const filteredCourses = courses.filter((course) => {
         return (
             course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||

@@ -5,10 +5,10 @@ import {useAtom} from "jotai";
 import state from "../../state";
 import {PostDataAuthenticated} from "../../services/FetchDataService";
 import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 const BecomeMentor = () => {
     const [userData] = useAtom(state.userData)
-    console.log(userData)
     const [token] = useAtom(state.token)
     const navigate = useNavigate()
     const formik = useFormik({
@@ -21,7 +21,9 @@ const BecomeMentor = () => {
         onSubmit: async (values) => {
             const payload = JSON.stringify({application: values.application, username: userData.sub})
             const response = await PostDataAuthenticated(payload, token, "user/applyMentor")
-            alert(response.message)
+            toast.info(response.message,{
+                position:toast.POSITION.TOP_RIGHT
+            })
             navigate("/")
         }
     })

@@ -3,6 +3,7 @@ import "./Home.css";
 import {useEffect, useState} from "react";
 import {GetData} from "../../services/FetchDataService";
 import CourseCard from "../CourseCard";
+import {ToastContainer} from "react-toastify";
 
 function Home() {
     const [courses, setCourses] = useState([])
@@ -25,6 +26,7 @@ function Home() {
                     </div>
                 </div>
             </section>
+            <ToastContainer />
         </>
     );
 }

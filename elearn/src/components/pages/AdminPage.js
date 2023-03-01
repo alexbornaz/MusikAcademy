@@ -26,8 +26,10 @@ const AdminPage = () => {
 
     useEffect(() => {
         (async () => {
-            const response = await GetDataAuthenticated("admin/allUsers", token)
-            setUsers(response)
+            if (token != null) {
+                const response = await GetDataAuthenticated("admin/allUsers", token)
+                setUsers(response)
+            }
         })()
     }, [token])
 
@@ -37,7 +39,7 @@ const AdminPage = () => {
 
     return (
         <>
-            {userData && userData.rol.includes("ADMIN") && (
+            {userData && userData.rol.includes("ADMIN") ? (
                 <div>
                     <div className="col">
                         <input
@@ -78,7 +80,7 @@ const AdminPage = () => {
                         </div>
                     )}</div>
                 </div>
-            )}
+            ) : <h1>404 NOT FOUND </h1>}
         </>)
 }
 export default AdminPage

@@ -4,6 +4,7 @@ import state from "../../state";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import PaymentModal from "../PaymentModal";
+import {toast} from "react-toastify";
 
 const StartCourse = ({username, courseId, coursePrice}) => {
     const [token] = useAtom(state.token)
@@ -22,7 +23,9 @@ const StartCourse = ({username, courseId, coursePrice}) => {
     const addCourse = async () => {
         const req = await PutDataAuthenticated(`user/${username}/addCourse/${courseId}`, token)
         console.log(req)
-        alert(req.message)
+        toast.info(req.message, {
+            position: toast.POSITION.TOP_RIGHT
+        })
         navigate(`/user/${username}/courseCurriculum/${courseId}`)
     }
 
@@ -38,17 +41,14 @@ const StartCourse = ({username, courseId, coursePrice}) => {
         navigate(`/user/${username}/courseCurriculum/${courseId}`)
     }
 
-    return (
-        <>
+    return (<>
             {isReady && enrolled.includes(courseId) ? (
-                    <button type="button" className="btn" style={{marginLeft: "auto"}} onClick={handleResume}>
-                        Resume Course
-                    </button>) :
-                (<button type="button" className="btn" style={{marginLeft: "auto"}} onClick={handleSubmit}>
-                    Start Course
-                </button>)}
+                <button type="button" className="btn" style={{marginLeft: "auto"}} onClick={handleResume}>
+                    Resume Course
+                </button>) : (<button type="button" className="btn" style={{marginLeft: "auto"}} onClick={handleSubmit}>
+                Start Course
+            </button>)}
             <PaymentModal showModal={showModal} setShowModal={setShowModal} courseId={courseId} addCourse={addCourse}/>
-        </>
-    );
+        </>);
 };
 export default StartCourse
