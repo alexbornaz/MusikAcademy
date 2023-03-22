@@ -19,7 +19,12 @@ ORM, and Docker for deployment.<p>
 <li>Admin can manage users,mentor applications</li>
 <li>Responsive design with Bootstrap</li>
 </ul>
-
+<h2>Samples</h2>
+<img src="samples/sample1.png" alt="screenshot of project">
+<img src="samples/sample2.png" alt="screenshot of project">
+<img src="samples/sample3.png" alt="screenshot of project">
+<img src="samples/sample4.png" alt="screenshot of project">
+<img src="samples/sample5.png" alt="screenshot of project">
 <h2>Installation</h2>
 
 <p>To install and run MusikAcademy on your local machine, follow these steps:</p>
