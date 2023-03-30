@@ -3,6 +3,7 @@ package com.grandProject.eLearn.controller;
 import com.grandProject.eLearn.dto.response.MessageResponse;
 import com.grandProject.eLearn.model.Subscriber;
 import com.grandProject.eLearn.service.NewsletterService;
+import com.grandProject.eLearn.service.SubscriberService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,16 +12,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/newsletter/")
 @Slf4j
 public class NewsLetterController {
-    private final NewsletterService newsletterService;
+    private final SubscriberService subscriberService;
 
-    public NewsLetterController(NewsletterService newsletterService) {
-        this.newsletterService = newsletterService;
+    public NewsLetterController(SubscriberService subscriberService) {
+        this.subscriberService = subscriberService;
+
     }
 
     @PostMapping("subscribe")
     public ResponseEntity<MessageResponse> subscribeNewsletter(@RequestBody Subscriber subscriber) {
         try {
-            newsletterService.addSubscriber(subscriber);
+            subscriberService.addSubscriber(subscriber);
             log.info("Request to add subscriber to newsletter database with email {}",subscriber.getEmail() );
         }catch (Exception e){
             log.error("Could not add email to subscribers");
@@ -33,7 +35,7 @@ public class NewsLetterController {
     @GetMapping("unsubscribe/{email}")
     public void unsubscribeFromNewsletter(@PathVariable String email){
         try {
-            newsletterService.removeSubscription(email);
+            subscriberService.removeSubscription(email);
             log.info("{} unsubscribed from newsletter",email);
         }catch (Exception e){
             log.error("{} could not unsubscribe",email);
@@ -43,7 +45,7 @@ public class NewsLetterController {
     @DeleteMapping("delete/{email}")
     public ResponseEntity<MessageResponse> deleteSubscriber(@PathVariable String email){
         try{
-            newsletterService.deleteSubscriber(email);
+            subscriberService.deleteSubscriber(email);
             log.info("Request to delete {} from subscribers database", email);
         }catch (Exception e){
             log.error("{} could not be removed from database",email);

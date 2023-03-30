@@ -28,4 +28,6 @@ public interface UserService {
 
     void applyMentor(MentorApplicationDTO mentorApplicationDTO);
     void makeMentor(String username);
+
+
 }
