@@ -4,13 +4,15 @@ import com.grandProject.eLearn.model.Course;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-
-public interface CourseRepository extends JpaRepository<Course,Long> {
+@Repository
+public interface CourseRepository extends JpaRepository<Course, Long> {
     boolean existsById(Long id);
-//    @Query("""
+
+    //    @Query("""
 //            SELECT course.id,course.title,course.description,course.image, COUNT(users_enrolled_courses.user_id) AS num_enrolled
 //            FROM course
 //            JOIN users_enrolled_courses

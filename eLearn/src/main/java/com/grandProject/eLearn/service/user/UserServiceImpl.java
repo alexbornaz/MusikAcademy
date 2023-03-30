@@ -54,7 +54,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
-        log.info("Created user with username {}",user.getUsername());
         return userRepository.save(user);
     }
 
@@ -77,8 +76,9 @@ public class UserServiceImpl implements UserService {
     public void applyMentor(MentorApplicationDTO mentorApplicationDTO) {
         if (userRepository.existsByUsername(mentorApplicationDTO.getUsername())){
             User user = validateAndGetUserByUsername(mentorApplicationDTO.getUsername());
-            System.out.println(user.getEmailAddress()+"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+            System.out.println("ajunge");
             emailSenderService.sendMentorApplication(user.getEmailAddress(),mentorApplicationDTO.getApplication());
+            System.out.println("aici");
             log.info("Application from {} sent",mentorApplicationDTO.getUsername());
         }else {
             log.error("Application from {} not sent",mentorApplicationDTO.getUsername());

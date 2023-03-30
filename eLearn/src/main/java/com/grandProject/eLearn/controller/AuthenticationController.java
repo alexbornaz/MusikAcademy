@@ -24,29 +24,23 @@ public class AuthenticationController {
 
     @PostMapping("/register")
     public ResponseEntity<?> signUp(@RequestBody SignUpRequest signUpRequest){
-        if (userAuthService.isValidUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.ok().body(new MessageResponse("Username already exists."));
-        }
-        if (userAuthService.isValidEmail(signUpRequest.getEmailAddress())) {
-            return ResponseEntity.ok().body(new MessageResponse("Email already exists"));
-        }
-        userAuthService.saveUser(signUpRequest);
-        String token = userAuthService.authenticateAndGetToken(signUpRequest.getUsername(),signUpRequest.getPassword());
         try {
-            emailSenderService.sendRegistrationEmailFromApp(signUpRequest.getEmailAddress(),signUpRequest.getUsername());
-        }catch (Exception e){
-            e.printStackTrace();
+            String token = userAuthService.registerUser(signUpRequest);
+            return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, token).build();
+        }catch (RuntimeException e){
+            return ResponseEntity.ok().body(new MessageResponse(e.getMessage()));
         }
-        return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, token).build();
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        if (userAuthService.checkCredentials(loginRequest)) {
-            String token = userAuthService.authenticateAndGetToken(loginRequest.getUsername(), loginRequest.getPassword());
+        try {
+            String token = userAuthService.signInUser(loginRequest);
             return ResponseEntity.ok().header(HttpHeaders.AUTHORIZATION, token).build();
+        }catch (RuntimeException e){
+            return ResponseEntity.ok().body(new MessageResponse("Invalid username or password"));
         }
-        return ResponseEntity.ok().body(new MessageResponse("Invalid username or password"));
+
     }
 
 

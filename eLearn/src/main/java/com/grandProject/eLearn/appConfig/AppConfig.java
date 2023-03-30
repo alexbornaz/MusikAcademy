@@ -15,8 +15,9 @@ public class AppConfig {
     public AppConfig(NewsletterService newsletterService) {
         this.newsletterService = newsletterService;
     }
-//second,minute,hour,day
+
     @Scheduled(cron = "0 0 0 * * ?")
+//    cron = "*/10 * * * * *"
     public void sendEmails(){
         log.info("Sending newsletter emails to subscribers");
         newsletterService.sendNewsletter();
